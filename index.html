@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" slick-uniqueid="3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="Hao Zhou, 周浩"> 
+<meta name="description" content="Hao Zhou&#39;s home page">
+<link rel="stylesheet" href="./page_files/style/jemdoc.css" type="text/css">
+<style type="text/css">
+</style>
+<title>Hao Zhou - Homepage</title>
+
+
+<style>
+/* 弹出框样式 */
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 9999;
+  width: 60%;
+  height: auto;
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+  border-radius: 10px; /* 添加圆角 */
+}
+
+/* 图片样式 */
+#popup img {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* 背景遮罩样式 */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+  </style>
+
+</head>
+
+
+  
+
+<body>
+
+  <div id="popup">
+    <img id="popup-image" src="" alt="弹出图片">
+  </div>
+  
+  <div class="overlay"></div>
+  
+  <script>
+  function showPopup(image) {
+    var popup = document.getElementById("popup");
+    var overlay = document.querySelector(".overlay");
+    var popupImage = document.getElementById("popup-image");
+  
+    // 设置弹出框中的图片
+    popupImage.src = image.src;
+  
+    // 显示弹出框和背景遮罩
+    popup.style.display = "block";
+    overlay.style.display = "block";
+  }
+  
+  document.querySelector(".overlay").addEventListener("click", function() {
+    var popup = document.getElementById("popup");
+    var overlay = document.querySelector(".overlay");
+  
+    // 隐藏弹出框和背景遮罩
+    popup.style.display = "none";
+    overlay.style.display = "none";
+  });
+  </script>
+
+
+<div id="layout-content" style="margin-top:25px">
+
+<table>
+<tbody>
+  <tr>
+    <!-- <td width="39%" valign="top" height="193">
+      <img height="190" id="photo" style="padding: 0pt 30pt 0pt 20pt; float: left; display: inline;" src="./page_files/img/wn_2022.jpg">
+    </td> -->
+    
+    <td width="60%" valign="top" height="193">
+      <b><font face="Times New Roman" size="6">Hao Zhou </font><font size="5.5" face="楷体_GB2312"> &nbsp 周 浩</font><font face="Times New Roman" size="6"></font></b>
+      <br><br>
+
+      <p>          
+          Researcher, Ph.D.
+      </p>
+      <p>          
+          <a href="https://vis.baidu.com/#/" target="_blank">Department of Computer Vision Technology (VIS)</a>
+      </p>
+      <p>          
+        <a href="https://ir.baidu.com/company-overview" target="_blank">Baidu Inc</a>
+    </p>
+      <p>          
+          Email: zhouh156 (at) mail.ustc.edu.cn
+      </p>
+      <p>          
+          <a href='https://scholar.google.com/citations?user=xZ-0R3cAAAAJ'>Google Scholar</a> / <a href='https://github.com/Rhythmblue'>Github</a>
+      </p>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+	
+<h2>About Me</h2>
+<p style="text-align:justify;">
+  I am currently a researcher in Baidu. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022. My supervisors are <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017. 
+</p>
+<p> 
+  My research interests are in computer vision, and I am currently working on cross-modal understanding (image, video and text) with large language models.
+</p>
+
+	
+<h2>Publications</h2>
+
+
+<p>*Equal contribition, †Corresponding author</p>
+
+<table border="0" width="100%" cellspacing="5">
+  <tbody>
+
+    <tr>
+      <td>
+        <div align="center">
+          <!-- <img width="230" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
+          <img height="110" width="230" src="./publications/acl-2024-s3lg/method.png" onclick="showPopup(this)" alt="点击图片">
+
+        </div>
+      </td>
+      <td>
+        <!-- <b> -->
+        Semi-Supervised Spoken Language Glossification
+        <!-- </b> -->
+        <br> 
+        Huijie Yao, Wengang Zhou, <strong>Hao Zhou</strong>, Houqiang Li
+        <br> 
+        The Annual Meeting of the Association for Computational Linguistics (ACL), 2024
+        <br>
+        [<a href="https://arxiv.org/pdf/2406.08173" target="_blank">pdf</a>]
+        [<a href="https://github.com/yaohj11/S3LG" target="_blank">code</a>]
+	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+      </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+    <tr>
+      <td>
+        <div align="center">
+          <!-- <img width="230" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
+          <img width="230" src="./publications/arxiv-2024-structextv3/framework.png" onclick="showPopup(this)" alt="点击图片">
+
+        </div>
+      </td>
+      <td>
+        <!-- <b> -->
+          StrucTexTv3: An Efficient Vision-Language Model for Text-rich Image Perception, Comprehension, and Beyond
+        <!-- </b> -->
+        <br> 
+        Pengyuan Lyu*, Yulin Li*, <strong>Hao Zhou,</strong> Weihong Ma, Xingyu Wan, Qunyi Xie, Liang Wu, Chengquan Zhang, Kun Yao, Errui Ding, Jingdong Wang
+        <br> 
+        arXiv preprint, 2024
+        <br>
+        [<a href="https://arxiv.org/pdf/2405.21013" target="_blank">pdf</a>]
+        <!-- [<a href="https://github.com/junkunyuan/HAP" target="_blank">code</a>] -->
+	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+      </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+    <tr>
+      <td>
+        <div align="center">
+          <!-- <img width="230" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
+          <img width="230" src="./publications/iclr-2024-froster/framework.png" onclick="showPopup(this)" alt="点击图片">
+
+        </div>
+      </td>
+      <td>
+        <!-- <b> -->
+          FROSTER: Frozen CLIP Is A Strong Teacher for Open-Vocabulary Action Recognition
+        <!-- </b> -->
+        <br> 
+        Xiaohu Huang, <strong>Hao Zhou</strong>, Kun Yao, Kai Han
+        <br> 
+        International Conference on Learning Representations (ICLR), 2024
+        <br>
+        [<a href="https://openreview.net/pdf?id=zYXFMeHRtO" target="_blank">pdf</a>]
+        [<a href="https://github.com/Visual-AI/FROSTER" target="_blank">code</a>]
+	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+      </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+  <tr>
+      <td>
+        <div align="center">
+          <!-- <img width="230" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
+          <img width="230" src="./publications/neurips-2023-hap/intro.jpeg" onclick="showPopup(this)" alt="点击图片">
+
+        </div>
+      </td>
+      <td>
+        <!-- <b> -->
+          HAP: Structure-Aware Masked Image Modeling for Human-Centric Perception
+        <!-- </b> -->
+        <br> 
+        Junkun Yuan*, Xinyu Zhang*, <strong>Hao Zhou</strong>, Jian Wang, Zhongwei Qiu, Zhiyin Shao, Shaofeng Zhang, Sifan Long, Kun Kuang, Kun Yao, Junyu Han, Errui Ding, Lanfen Lin, Fei Wu and Jingdong Wang
+        <br> 
+        Conference on Neural Information Processing Systems (NeurIPS), 2023
+        <br>
+        [<a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>]
+        [<a href="https://github.com/junkunyuan/HAP" target="_blank">code</a>]
+	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+      </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+  <tr>
+    <td>
+      <div align="center">
+        <img width="230" src="./publications/iccv-2023-ipslt/intro.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Sign Language Translation with Iterative Prototype
+      <!-- </b> -->
+      <br> 
+      Huijie Yao, Wengang Zhou, Hao Feng, Hezhen Hu, <strong>Hao Zhou</strong>, Houqiang Li
+      <br> 
+      International Conference on Computer Vision (ICCV), 2023
+      <br>
+      [<a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>]
+    </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+  <tr>
+    <td>
+      <div align="center">
+        <img width="230" src="./publications/iclr-2023-skeletongcl/framework.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Graph Contrastive Learning for Skeleton-based Action Recognition
+      <!-- </b> -->
+      <br> 
+      Xiaohu Huang, <b>Hao Zhou†</b>, Jian Wang, Haocheng Feng, Junyu Han, Errui Ding, Jingdong Wang, Xinggang Wang, Wenyu Liu, Bin Feng
+      <br> 
+      International Conference on Learning Representations (ICLR), 2023
+      <br>
+      [<a href="https://arxiv.org/pdf/2301.10900.pdf" target="_blank">pdf</a>]
+      [<a href="https://github.com/OliverHxh/SkeletonGCL" target="_blank">code</a>]
+    </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+  <tr>
+    <td>
+      <div align="center">
+        <img width="230" src="./publications/tmm-2021-stmct/intro.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Spatial-Temporal Multi-Cue Network for Continuous Sign Language Recognition and Translation
+      <!-- </b> -->
+      <br> 
+      <b>Hao Zhou</b>, Wengang Zhou, Yun Zhou, Houqiang Li
+      <br> 
+      IEEE Transactions on Multimedia, 2021
+      <br>
+      [<a href="https://ieeexplore.ieee.org/abstract/document/9354538/" target="_blank">pdf</a>]
+    </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+  <tr>
+    <td>
+      <div align="center">
+        <img width="230" src="./publications/cvpr-2021-signbt/intro.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Improving Sign Language Translation with Monolingual Data by Sign Back-Translation
+      <!-- </b> -->
+      <br> 
+      <b>Hao Zhou</b>, Wengang Zhou, Weizhen Qi, Junfu Pu, Houqiang Li
+      <br> 
+      IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
+      <br>
+      [<a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank">pdf</a>]
+    </td>
+  </tr>	
+  
+  <tr></tr>	
+  <tr></tr>	
+
+  <tr>
+    <td>
+      <div align="center">
+        <img width="230" src="./publications/aaai-2020-stmcr/framework.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Spatial-Temporal Multi-Cue Network for Continuous Sign Language Recognition
+      <!-- </b> -->
+      <br> 
+      <b>Hao Zhou</b>, Wengang Zhou, Yun Zhou, Houqiang Li
+      <br> 
+      AAAI Conference on Artificial Intelligence (AAAI), Oral, 2020
+      <br>
+      [<a href="https://arxiv.org/pdf/2002.03187.pdf" target="_blank">pdf</a>]
+    </td>
+  </tr>	
+
+  <tr></tr>	
+  <tr></tr>	
+
+  <tr>
+    <td>
+      <div align="center">
+        <img width="230" src="./publications/icme-2019-dpd/framework.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Dynamic Pseudo Label Decoding for Continuous Sign Language Recognition
+      <!-- </b> -->
+      <br> 
+      <b>Hao Zhou</b>, Wengang Zhou, Houqiang Li
+      <br> 
+      IEEE International Conference on Multimedia and Expo (ICME), 2019
+      <br>
+      [<a href="https://ieeexplore.ieee.org/document/8784863" target="_blank">pdf</a>]
+    </td>
+  </tr>	
+  
+
+
+  </tbody>
+</table>
+ 
+
+<h2>Academic Services</h2>
+<table id="tbServices" border="0" width="100%">
+  <tbody>
+Invited Reviewer for Journals and Conferences:
+    <tr>
+      <td>   &nbsp; IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)  </td>
+    </tr>
+    <tr>
+      <td>   &nbsp; IEEE Transactions on Circuits and Systems for Video Technology (TCSVT)  </td>
+    </tr>
+
+    <tr>
+      <td>   &nbsp; IEEE Transactions on Multimedia (TMM)  </td>
+    </tr>
+    
+    <tr>
+      <td>   &nbsp; IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024  </td>
+    </tr>
+
+    <tr>
+      <td>   &nbsp; AAAI Conference on Artificial Intelligence (AAAI), 2023, 2024, 2025  </td>
+    </tr>
+     
+  </tbody>
+</table> 	
+	
+	
+<h2>Working Experience</h2>
+<table id="tbExperiences" border="0" width="100%">
+  <tbody>
+    <tr>
+      <td> July. 2022 - Present  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Researcher, Department of Computer Vision Technology (VIS), Baidu </td>
+    </tr>
+	  
+    <tr>
+      <td> May. 2019 - July. 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Research Intern, BigData Group, Baidu</td>
+    </tr>
+  </tbody>
+</table> 
+
+<h2>Teaching Experience</h2>
+<table id="tbExperiences" border="0" width="100%">
+  <tbody>
+    <tr>
+      <td> Spring 2020  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02, <a href="https://ustc-dia.github.io/" target="_blank">Digital Image Analysis</a> </td>
+    </tr>
+    <tr>
+      <td> Spring 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01, <a href="https://ustc-dip.github.io" target="_blank"> Digital Image Processing B </a> </td>
+    </tr>
+</tbody>
+</table> 
+	
+<h2>Awards</h2>
+<table id="tbAwards" border="0" width="100%">
+  <tbody>
+
+    <tr>
+      <td> 2021  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Runner-up (2/132), ChaLearn LAP Large Scale Signer Independent Isolated SLR Challenge, CVPR</td>
+    </tr>
+
+    <tr>
+      <td> 2017  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Outstanding Graduate Student, XDU</td>
+    </tr>
+
+    <tr>
+      <td> 2014  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; National Scholarship, Ministry of Education, PRC </td>
+    </tr>
+  </tbody>
+</table> 
+
+
+<!--
+<h2></h2>
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=uZ8BI7fPH9kpWPUfOgpU4pVBHOLczY98e-Pp1DC8JBE'></script>
+-->
+	
+</div>
+</body>
+</html>
+
