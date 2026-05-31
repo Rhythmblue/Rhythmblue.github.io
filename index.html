@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" slick-uniqueid="3">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="keywords" content="Hao Zhou, 周浩"> 
+<meta name="keywords" content="Hao Zhou, 周浩">
 <meta name="description" content="Hao Zhou&#39;s home page">
 <link rel="stylesheet" href="./page_files/style/jemdoc.css" type="text/css">
 <style type="text/css">
@@ -56,11 +56,95 @@
       max-height: 80px;
       width: auto;
       height: auto;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      background: #fff;
 }
 
 th, td {
     padding: 0px 5px; /* 增加内边距 */
     /* border: 1px solid black; 添加边框以便更好地看到效果 */
+}
+
+#layout-content h2,
+#layout-content h3 {
+    color: #000;
+}
+
+#publications h3 {
+    margin: 12px 0 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #000;
+    font-size: 1.05em;
+}
+
+#publications table {
+    border-collapse: collapse;
+    margin: 0 0 4px 0;
+}
+
+#publications tr {
+    vertical-align: top;
+}
+
+#publications td {
+    padding: 2px 5px;
+    line-height: 1.35;
+}
+
+#selected-publications td {
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+#publications td:first-child {
+    width: 230px;
+}
+
+#publications td:nth-child(2) {
+    color: #444;
+}
+
+#publications .pub-title {
+    color: #111;
+    font-weight: 600;
+}
+
+#publications b,
+#publications strong {
+    color: #111;
+}
+
+#publications a {
+    display: inline-block;
+    margin: 2px 4px 0 0;
+    padding: 0 6px;
+    border: 1px solid #cfe0f3;
+    border-radius: 4px;
+    background: #f7fbff;
+    color: #1f5f9f;
+    font-size: 12px;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+#publications a:hover {
+    background: #edf6ff;
+    border-color: #9fc3e8;
+    text-decoration: none;
+}
+
+.profile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.profile-link img {
+    width: 15px;
+    height: 15px;
+    vertical-align: -2px;
 }
 
 </style>
@@ -70,7 +154,7 @@ var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?15ceed2880b6f80fba8d95e91c932ef0";
-  var s = document.getElementsByTagName("script")[0]; 
+  var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
@@ -78,37 +162,52 @@ var _hmt = _hmt || [];
 </head>
 
 
-  
+
 
 <body>
 
   <div id="popup">
     <img id="popup-image" src="" alt="弹出图片">
   </div>
-  
+
   <div class="overlay"></div>
-  
+
   <script>
   function showPopup(image) {
     var popup = document.getElementById("popup");
     var overlay = document.querySelector(".overlay");
     var popupImage = document.getElementById("popup-image");
-  
+
     // 设置弹出框中的图片
     popupImage.src = image.src;
-  
+
     // 显示弹出框和背景遮罩
     popup.style.display = "block";
     overlay.style.display = "block";
   }
-  
+
   document.querySelector(".overlay").addEventListener("click", function() {
     var popup = document.getElementById("popup");
     var overlay = document.querySelector(".overlay");
-  
+
     // 隐藏弹出框和背景遮罩
     popup.style.display = "none";
     overlay.style.display = "none";
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll("#publications table tr td:nth-child(2)").forEach(function(cell) {
+      for (var i = 0; i < cell.childNodes.length; i++) {
+        var node = cell.childNodes[i];
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+          var span = document.createElement("span");
+          span.className = "pub-title";
+          span.textContent = node.textContent.trim();
+          cell.replaceChild(span, node);
+          break;
+        }
+      }
+    });
   });
   </script>
 
@@ -121,51 +220,70 @@ var _hmt = _hmt || [];
     <!-- <td width="39%" valign="top" height="193">
       <img height="190" id="photo" style="padding: 0pt 30pt 0pt 20pt; float: left; display: inline;" src="./page_files/img/wn_2022.jpg">
     </td> -->
-    
+
     <td width="60%" valign="top" height="193">
       <b><font face="Times New Roman" size="6">Hao Zhou </font><font size="5.5" face="楷体_GB2312"> &nbsp 周 浩</font><font face="Times New Roman" size="6"></font></b>
       <br><br>
 
-      <p>          
+      <p>
           Researcher, Ph.D.
       </p>
-      <p>          
+      <p>
           <!-- <a href="https://vis.baidu.com/#/" target="_blank">Department of Computer Vision Technology (VIS)</a> -->
-          Monetization GenAI
+          Monetization GenAI, ByteDance Inc.
       </p>
-      <p>          
-        <!-- <a href="https://ir.baidu.com/company-overview" target="_blank">Baidu Inc</a> -->
-        Bytedance Inc
-    </p>
-      <p>          
+      <p>
           Email: zhouh156 (at) mail.ustc.edu.cn
       </p>
-      <p>          
-          <a href='https://scholar.google.com/citations?user=xZ-0R3cAAAAJ'>Google Scholar</a> / <a href='https://github.com/Rhythmblue'>Github</a>
+      <p>
+          <a class="profile-link" href='https://scholar.google.com/citations?user=xZ-0R3cAAAAJ'><img src="./page_files/img/google-scholar.svg" alt="">Google Scholar</a> / <a class="profile-link" href='https://github.com/Rhythmblue'><img src="./page_files/img/github.svg" alt="">GitHub</a>
       </p>
     </td>
   </tr>
 </tbody>
 </table>
 
-	
+
 <h2>About Me</h2>
 <p style="text-align:justify;">
-  I am currently a researcher in Bytedance and focus on developing generative AI in the ads tech and creative industry. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022. My supervisors are <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017. 
+  I am currently a researcher in Bytedance and focus on developing generative AI in the ads tech and creative industry. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022. My supervisors are <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017.
 </p>
-<p> 
+<p>
   <!-- My research interests are in computer vision, and I am currently working on cross-modal understanding (image, video and text) with large language models. -->
   My research interests are in computer vision, and I am currently working on video understanding, generation and editing for creative ads.
 </p>
 
-	
+
+<div id="publications">
+
 <h2>Publications</h2>
 
 
-<p>*Equal contribition, †Corresponding author</p>
+<p>*Equal contribution, †Corresponding author</p>
 
-<table border="0" width="100%" cellspacing="5">
+<h3>Selected Publications</h3>
+<table id="selected-publications" border="0" width="100%" cellspacing="5">
   <tbody>
+
+  <tr>
+      <td>
+        <div align="center">
+          <img class="responsive-img"  src="./publications/arxiv-2025-jova/framework.jpg" onclick="showPopup(this)" alt="点击图片">
+        </div>
+      </td>
+      <td>
+        JoVA: Unified Multimodal Learning for Joint Video-Audio Generation
+        <br>
+        Xiaohu Huang*, <b>Hao Zhou*</b>, Qiangpeng Yang, Shilei Wen, Kai Han
+        <br>
+        arXiv preprint, 2025
+        <br>
+        <a href="https://arxiv.org/pdf/2512.13677" target="_blank">pdf</a>
+        <a href="https://visual-ai.github.io/jova/" target="_blank">project</a>
+        <a href="https://github.com/Visual-AI/JoVA" target="_blank">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+      </td>
+  </tr>
 
   <tr>
       <td>
@@ -175,16 +293,84 @@ var _hmt = _hmt || [];
       </td>
       <td>
         PruneVid: Visual Token Pruning for Efficient Video Large Language Models
-        <br> 
+        <br>
         Xiaohu Huang, <b>Hao Zhou</b>, Kai Han
-        <br> 
+        <br>
         The Annual Meeting of the Association for Computational Linguistics (ACL), Findings, 2025
         <br>
-        [<a href="https://arxiv.org/pdf/2412.16117v1" target="_blank">pdf</a>]
-        [<a href="https://github.com/Visual-AI/PruneVid" target="_blank">code</a>]
-	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+        <a href="https://arxiv.org/pdf/2412.16117v1" target="_blank">pdf</a>
+        <a href="https://github.com/Visual-AI/PruneVid" target="_blank">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
       </td>
-  </tr>	
+  </tr>
+
+  <tr>
+      <td>
+        <div align="center">
+          <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
+          <img class="responsive-img" src="./publications/arxiv-2024-structextv3/framework.png" onclick="showPopup(this)" alt="点击图片">
+
+        </div>
+      </td>
+      <td>
+        <!-- <b> -->
+          StrucTexTv3: An Efficient Vision-Language Model for Text-rich Image Perception, Comprehension, and Beyond
+        <!-- </b> -->
+        <br>
+        Pengyuan Lyu*, Yulin Li*, <strong>Hao Zhou,</strong> Weihong Ma, Xingyu Wan, Qunyi Xie, Liang Wu, Chengquan Zhang, Kun Yao, Errui Ding, Jingdong Wang
+        <br>
+        arXiv preprint, 2024
+        <br>
+        <a href="https://arxiv.org/pdf/2405.21013" target="_blank">pdf</a>
+        <!-- <a href="https://github.com/junkunyuan/HAP" target="_blank">code</a> -->
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+      </td>
+  </tr>
+
+  <tr>
+    <td>
+      <div align="center">
+        <img class="responsive-img" src="./publications/cvpr-2021-signbt/intro.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Improving Sign Language Translation with Monolingual Data by Sign Back-Translation
+      <!-- </b> -->
+      <br>
+      <b>Hao Zhou</b>, Wengang Zhou, Weizhen Qi, Junfu Pu, Houqiang Li
+      <br>
+      IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
+      <br>
+      <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank">pdf</a>
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+
+<h3>Other Publications</h3>
+<table border="0" width="100%" cellspacing="5">
+  <tbody>
+
+  <tr>
+      <td>
+        <div align="center">
+          <img class="responsive-img"  src="./publications/tomm-2026-raslt/intro.jpg" onclick="showPopup(this)" alt="点击图片">
+        </div>
+      </td>
+      <td>
+        Retrieval-Augmented Sign Language Translation
+        <br>
+        Huijie Yao, Wengang Zhou, <b>Hao Zhou</b>, Hezhen Hu, Houqiang Li
+        <br>
+        ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 2026
+        <br>
+        <a href="https://doi.org/10.1145/3771277" target="_blank">doi</a>
+        <a href="https://dblp.org/rec/journals/tomccap/YaoZZHL26" target="_blank">dblp</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+      </td>
+  </tr>
 
   <tr>
       <td>
@@ -195,18 +381,18 @@ var _hmt = _hmt || [];
       </td>
       <td>
         Change3D: Revisiting Change Detection and Captioning from A Video Modeling Perspective
-        <br> 
+        <br>
         Duowang Zhu, Xiaohu Huang, Haiyan Huang, <b>Hao Zhou</b>, Zhenfeng Shao
-        <br> 
+        <br>
         IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), <b>Highlight</b>, 2025
         <br>
-        [<a href="https://arxiv.org/pdf/2503.18803" target="_blank">pdf</a>]
-        [<a href="https://github.com/zhuduowang/Change3D" target="_blank">code</a>]
-	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+        <a href="https://arxiv.org/pdf/2503.18803" target="_blank">pdf</a>
+        <a href="https://github.com/zhuduowang/Change3D" target="_blank">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
       </td>
-  </tr>	
+  </tr>
 
-    <tr>
+  <tr>
       <td>
         <div align="center">
           <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
@@ -219,16 +405,16 @@ var _hmt = _hmt || [];
         Skim then Focus: Integrating Contextual and Fine-grained Views for Repetitive Action Counting
 
         <!-- </b> -->
-        <br> 
+        <br>
         Zhengqi Zhao*, Xiaohu Huang*, <strong>Hao Zhou†</strong>, Kun Yao, Errui Ding, Jingdong Wang, Xinggang Wang, Wenyu Liu, Bin Feng†
-        <br> 
+        <br>
         International Journal of Computer Vision (IJCV), 2025
         <br>
-        [<a href="https://arxiv.org/pdf/2406.08814" target="_blank">pdf</a>]
+        <a href="https://arxiv.org/pdf/2406.08814" target="_blank">pdf</a>
       </td>
-  </tr>	
+  </tr>
 
-    <tr>
+  <tr>
       <td>
         <div align="center">
           <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
@@ -240,47 +426,18 @@ var _hmt = _hmt || [];
         <!-- <b> -->
         Semi-Supervised Spoken Language Glossification
         <!-- </b> -->
-        <br> 
+        <br>
         Huijie Yao, Wengang Zhou, <strong>Hao Zhou</strong>, Houqiang Li
-        <br> 
+        <br>
         The Annual Meeting of the Association for Computational Linguistics (ACL), 2024
         <br>
-        [<a href="https://arxiv.org/pdf/2406.08173" target="_blank">pdf</a>]
-        [<a href="https://github.com/yaohj11/S3LG" target="_blank">code</a>]
-	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+        <a href="https://arxiv.org/pdf/2406.08173" target="_blank">pdf</a>
+        <a href="https://github.com/yaohj11/S3LG" target="_blank">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
       </td>
-  </tr>	
+  </tr>
 
-  <tr></tr>	
-  <tr></tr>	
-
-    <tr>
-      <td>
-        <div align="center">
-          <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
-          <img class="responsive-img" src="./publications/arxiv-2024-structextv3/framework.png" onclick="showPopup(this)" alt="点击图片">
-
-        </div>
-      </td>
-      <td>
-        <!-- <b> -->
-          StrucTexTv3: An Efficient Vision-Language Model for Text-rich Image Perception, Comprehension, and Beyond
-        <!-- </b> -->
-        <br> 
-        Pengyuan Lyu*, Yulin Li*, <strong>Hao Zhou,</strong> Weihong Ma, Xingyu Wan, Qunyi Xie, Liang Wu, Chengquan Zhang, Kun Yao, Errui Ding, Jingdong Wang
-        <br> 
-        arXiv preprint, 2024
-        <br>
-        [<a href="https://arxiv.org/pdf/2405.21013" target="_blank">pdf</a>]
-        <!-- [<a href="https://github.com/junkunyuan/HAP" target="_blank">code</a>] -->
-	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
-      </td>
-  </tr>	
-
-  <tr></tr>	
-  <tr></tr>	
-
-    <tr>
+  <tr>
       <td>
         <div align="center">
           <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
@@ -292,19 +449,16 @@ var _hmt = _hmt || [];
         <!-- <b> -->
           FROSTER: Frozen CLIP Is A Strong Teacher for Open-Vocabulary Action Recognition
         <!-- </b> -->
-        <br> 
+        <br>
         Xiaohu Huang, <strong>Hao Zhou</strong>, Kun Yao, Kai Han
-        <br> 
+        <br>
         International Conference on Learning Representations (ICLR), 2024
         <br>
-        [<a href="https://openreview.net/pdf?id=zYXFMeHRtO" target="_blank">pdf</a>]
-        [<a href="https://github.com/Visual-AI/FROSTER" target="_blank">code</a>]
-	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+        <a href="https://openreview.net/pdf?id=zYXFMeHRtO" target="_blank">pdf</a>
+        <a href="https://github.com/Visual-AI/FROSTER" target="_blank">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
       </td>
-  </tr>	
-
-  <tr></tr>	
-  <tr></tr>	
+  </tr>
 
   <tr>
       <td>
@@ -318,19 +472,16 @@ var _hmt = _hmt || [];
         <!-- <b> -->
           HAP: Structure-Aware Masked Image Modeling for Human-Centric Perception
         <!-- </b> -->
-        <br> 
+        <br>
         Junkun Yuan*, Xinyu Zhang*, <strong>Hao Zhou</strong>, Jian Wang, Zhongwei Qiu, Zhiyin Shao, Shaofeng Zhang, Sifan Long, Kun Kuang, Kun Yao, Junyu Han, Errui Ding, Lanfen Lin, Fei Wu and Jingdong Wang
-        <br> 
+        <br>
         Conference on Neural Information Processing Systems (NeurIPS), 2023
         <br>
-        [<a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>]
-        [<a href="https://github.com/junkunyuan/HAP" target="_blank">code</a>]
-	      <!-- [<a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>]  -->
+        <a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>
+        <a href="https://github.com/junkunyuan/HAP" target="_blank">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
       </td>
-  </tr>	
-
-  <tr></tr>	
-  <tr></tr>	
+  </tr>
 
   <tr>
     <td>
@@ -342,17 +493,14 @@ var _hmt = _hmt || [];
       <!-- <b> -->
         Sign Language Translation with Iterative Prototype
       <!-- </b> -->
-      <br> 
+      <br>
       Huijie Yao, Wengang Zhou, Hao Feng, Hezhen Hu, <strong>Hao Zhou</strong>, Houqiang Li
-      <br> 
+      <br>
       International Conference on Computer Vision (ICCV), 2023
       <br>
-      [<a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>]
+      <a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>
     </td>
-  </tr>	
-
-  <tr></tr>	
-  <tr></tr>	
+  </tr>
 
   <tr>
     <td>
@@ -364,18 +512,15 @@ var _hmt = _hmt || [];
       <!-- <b> -->
         Graph Contrastive Learning for Skeleton-based Action Recognition
       <!-- </b> -->
-      <br> 
+      <br>
       Xiaohu Huang, <b>Hao Zhou†</b>, Jian Wang, Haocheng Feng, Junyu Han, Errui Ding, Jingdong Wang, Xinggang Wang, Wenyu Liu, Bin Feng
-      <br> 
+      <br>
       International Conference on Learning Representations (ICLR), 2023
       <br>
-      [<a href="https://arxiv.org/pdf/2301.10900.pdf" target="_blank">pdf</a>]
-      [<a href="https://github.com/OliverHxh/SkeletonGCL" target="_blank">code</a>]
+      <a href="https://arxiv.org/pdf/2301.10900.pdf" target="_blank">pdf</a>
+      <a href="https://github.com/OliverHxh/SkeletonGCL" target="_blank">code</a>
     </td>
-  </tr>	
-
-  <tr></tr>	
-  <tr></tr>	
+  </tr>
 
   <tr>
     <td>
@@ -387,39 +532,14 @@ var _hmt = _hmt || [];
       <!-- <b> -->
         Spatial-Temporal Multi-Cue Network for Continuous Sign Language Recognition and Translation
       <!-- </b> -->
-      <br> 
+      <br>
       <b>Hao Zhou</b>, Wengang Zhou, Yun Zhou, Houqiang Li
-      <br> 
+      <br>
       IEEE Transactions on Multimedia, 2021
       <br>
-      [<a href="https://ieeexplore.ieee.org/abstract/document/9354538/" target="_blank">pdf</a>]
+      <a href="https://ieeexplore.ieee.org/abstract/document/9354538/" target="_blank">pdf</a>
     </td>
-  </tr>	
-
-  <tr></tr>	
-  <tr></tr>	
-
-  <tr>
-    <td>
-      <div align="center">
-        <img class="responsive-img" src="./publications/cvpr-2021-signbt/intro.png" onclick="showPopup(this)" alt="点击图片">
-      </div>
-    </td>
-    <td>
-      <!-- <b> -->
-        Improving Sign Language Translation with Monolingual Data by Sign Back-Translation
-      <!-- </b> -->
-      <br> 
-      <b>Hao Zhou</b>, Wengang Zhou, Weizhen Qi, Junfu Pu, Houqiang Li
-      <br> 
-      IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
-      <br>
-      [<a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank">pdf</a>]
-    </td>
-  </tr>	
-  
-  <tr></tr>	
-  <tr></tr>	
+  </tr>
 
   <tr>
     <td>
@@ -431,17 +551,14 @@ var _hmt = _hmt || [];
       <!-- <b> -->
         Spatial-Temporal Multi-Cue Network for Continuous Sign Language Recognition
       <!-- </b> -->
-      <br> 
+      <br>
       <b>Hao Zhou</b>, Wengang Zhou, Yun Zhou, Houqiang Li
-      <br> 
+      <br>
       AAAI Conference on Artificial Intelligence (AAAI), <b>Oral</b>, 2020
       <br>
-      [<a href="https://arxiv.org/pdf/2002.03187.pdf" target="_blank">pdf</a>]
+      <a href="https://arxiv.org/pdf/2002.03187.pdf" target="_blank">pdf</a>
     </td>
-  </tr>	
-
-  <tr></tr>	
-  <tr></tr>	
+  </tr>
 
   <tr>
     <td>
@@ -453,20 +570,20 @@ var _hmt = _hmt || [];
       <!-- <b> -->
         Dynamic Pseudo Label Decoding for Continuous Sign Language Recognition
       <!-- </b> -->
-      <br> 
+      <br>
       <b>Hao Zhou</b>, Wengang Zhou, Houqiang Li
-      <br> 
+      <br>
       IEEE International Conference on Multimedia and Expo (ICME), 2019
       <br>
-      [<a href="https://ieeexplore.ieee.org/document/8784863" target="_blank">pdf</a>]
+      <a href="https://ieeexplore.ieee.org/document/8784863" target="_blank">pdf</a>
     </td>
-  </tr>	
-  
-
+  </tr>
 
   </tbody>
 </table>
- 
+
+</div>
+
 
 <h2>Academic Services</h2>
 <table id="tbServices" border="0" width="100%">
@@ -482,7 +599,7 @@ Invited Reviewer for Journals and Conferences:
     <tr>
       <td>   &nbsp; IEEE Transactions on Multimedia (TMM)  </td>
     </tr>
-    
+
     <tr>
       <td>   &nbsp; IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024, 2025  </td>
     </tr>
@@ -498,31 +615,31 @@ Invited Reviewer for Journals and Conferences:
     <tr>
       <td>   &nbsp; International Conference on Machine Learning (ICML), 2025  </td>
     </tr>
-	  
+
     <tr>
       <td>   &nbsp; AAAI Conference on Artificial Intelligence (AAAI), 2023, 2024, 2025  </td>
     </tr>
-     
+
   </tbody>
-</table> 	
-	
-	
+</table>
+
+
 <h2>Working Experience</h2>
 <table id="tbExperiences" border="0" width="100%">
   <tbody>
     <tr>
-      <td> January. 2025 - Now  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Researcher, Monetization GenAI, Bytedance </td>
+      <td> Jan. 2025 - Present  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Researcher, Monetization GenAI, Bytedance </td>
     </tr>
 
     <tr>
       <td> July. 2022 - Dec. 2024  &nbsp;&nbsp;&nbsp;&nbsp; Researcher, Department of Computer Vision Technology (VIS), Baidu </td>
     </tr>
-	  
+
     <tr>
       <td> May. 2019 - July. 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Research Intern, BigData Group, Baidu</td>
     </tr>
   </tbody>
-</table> 
+</table>
 
 <h2>Teaching Experience</h2>
 <table id="tbExperiences" border="0" width="100%">
@@ -534,8 +651,8 @@ Invited Reviewer for Journals and Conferences:
       <td> Spring 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01, <a href="https://ustc-dip.github.io" target="_blank"> Digital Image Processing B </a> </td>
     </tr>
 </tbody>
-</table> 
-	
+</table>
+
 <h2>Awards</h2>
 <table id="tbAwards" border="0" width="100%">
   <tbody>
@@ -552,14 +669,14 @@ Invited Reviewer for Journals and Conferences:
       <td> 2014  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; National Scholarship, Ministry of Education, PRC </td>
     </tr>
   </tbody>
-</table> 
+</table>
 
 
 <!--
 <h2></h2>
 <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=300&t=tt&d=uZ8BI7fPH9kpWPUfOgpU4pVBHOLczY98e-Pp1DC8JBE'></script>
 -->
-	
+
 </div>
 </body>
 </html>
