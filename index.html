@@ -93,7 +93,7 @@ th, td {
     line-height: 1.35;
 }
 
-#selected-publications td {
+#publications-table td {
     padding-top: 6px;
     padding-bottom: 6px;
 }
@@ -135,6 +135,58 @@ th, td {
     text-decoration: none;
 }
 
+#publications .paper-timeline {
+    margin: 8px 0 2px 0;
+    padding: 8px 10px;
+    border-left: 2px solid #cfe0f3;
+    background: #fafcff;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+#publications .paper-timeline ul {
+    margin: 0;
+    padding-left: 16px;
+    list-style-type: disc;
+}
+
+#publications .paper-timeline li {
+    margin: 0 0 5px 0;
+}
+
+.publication-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0 0 8px 0;
+}
+
+.publication-filter {
+    padding: 2px 8px;
+    border: 1px solid #cfe0f3;
+    border-radius: 4px;
+    background: #f7fbff;
+    color: #1f5f9f;
+    cursor: pointer;
+    font-family: Arial, "Microsoft YaHei", sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.publication-filter:hover,
+.publication-filter:focus {
+    background: #edf6ff;
+    border-color: #9fc3e8;
+    outline: none;
+}
+
+.publication-filter.is-active {
+    background: #1f5f9f;
+    border-color: #1f5f9f;
+    color: #fff;
+}
+
 .profile-link {
     display: inline-flex;
     align-items: center;
@@ -145,6 +197,97 @@ th, td {
     width: 15px;
     height: 15px;
     vertical-align: -2px;
+}
+
+.experience-table td {
+    padding: 2px 5px;
+    vertical-align: top;
+}
+
+.experience-date {
+    width: 175px;
+    white-space: nowrap;
+}
+
+.language-switch {
+    position: fixed;
+    top: 14px;
+    right: 18px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border: 1px solid #d8dde6;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    font-family: Arial, "Microsoft YaHei", sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.language-switch button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: 1px solid #b8c7d9;
+    border-radius: 50%;
+    background: #f8fafc;
+    color: #1f2937;
+    cursor: pointer;
+    font: inherit;
+}
+
+.language-switch button:hover,
+.language-switch button:focus {
+    background: #eef6ff;
+    border-color: #7aa6d8;
+    outline: none;
+}
+
+.language-icon {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    width: 22px;
+    font-family: Arial, "Microsoft YaHei", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.language-icon span:first-child {
+    color: #1f5f9f;
+    text-align: right;
+}
+
+.language-icon span:last-child {
+    color: #111;
+    text-align: left;
+}
+
+body[data-lang="en"] .lang-zh,
+body[data-lang="zh"] .lang-en {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    body {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .language-switch {
+        position: static;
+        justify-content: flex-end;
+        margin: 0 0 12px auto;
+        width: fit-content;
+    }
+
 }
 
 </style>
@@ -164,7 +307,13 @@ var _hmt = _hmt || [];
 
 
 
-<body>
+<body data-lang="en">
+
+  <div class="language-switch" aria-label="Language switch">
+    <button id="language-toggle" type="button" title="Switch between English and Chinese">
+      <span class="language-icon" aria-hidden="true"><span>文</span><span>A</span></span>
+    </button>
+  </div>
 
   <div id="popup">
     <img id="popup-image" src="" alt="弹出图片">
@@ -196,6 +345,76 @@ var _hmt = _hmt || [];
   });
 
   document.addEventListener("DOMContentLoaded", function() {
+    var langToggle = document.getElementById("language-toggle");
+    var savedLang = "en";
+
+    try {
+      savedLang = localStorage.getItem("homepage-lang") || "en";
+    } catch (error) {
+      savedLang = "en";
+    }
+
+    function setLanguage(lang) {
+      document.body.setAttribute("data-lang", lang);
+      document.documentElement.setAttribute("xml:lang", lang === "zh" ? "zh-CN" : "en");
+      document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+      document.title = lang === "zh" ? "周浩 - 个人主页" : "Hao Zhou - Homepage";
+      langToggle.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换到中文");
+      langToggle.setAttribute("title", lang === "zh" ? "Switch to English" : "切换到中文");
+      try {
+        localStorage.setItem("homepage-lang", lang);
+      } catch (error) {
+      }
+    }
+
+    langToggle.addEventListener("click", function() {
+      setLanguage(document.body.getAttribute("data-lang") === "zh" ? "en" : "zh");
+    });
+
+    setLanguage(savedLang === "zh" ? "zh" : "en");
+
+    var publicationFilters = document.querySelectorAll(".publication-filter");
+    var publicationRows = document.querySelectorAll("#publications-table tbody tr[data-tags]");
+
+    function setPublicationFilter(filter) {
+      publicationFilters.forEach(function(button) {
+        var isActive = button.getAttribute("data-filter") === filter;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      publicationRows.forEach(function(row) {
+        var tags = row.getAttribute("data-tags").split(",");
+        row.style.display = filter === "all" || tags.indexOf(filter) !== -1 ? "" : "none";
+      });
+    }
+
+    publicationFilters.forEach(function(button) {
+      button.addEventListener("click", function() {
+        setPublicationFilter(button.getAttribute("data-filter"));
+      });
+    });
+
+    setPublicationFilter("selected");
+
+    document.querySelectorAll(".timeline-toggle").forEach(function(toggle) {
+      toggle.addEventListener("click", function(event) {
+        event.preventDefault();
+        var timeline = document.getElementById(toggle.getAttribute("data-target"));
+        if (!timeline) {
+          return;
+        }
+
+        var isHidden = timeline.hasAttribute("hidden");
+        if (isHidden) {
+          timeline.removeAttribute("hidden");
+        } else {
+          timeline.setAttribute("hidden", "");
+        }
+        toggle.setAttribute("aria-expanded", isHidden ? "true" : "false");
+      });
+    });
+
     document.querySelectorAll("#publications table tr td:nth-child(2)").forEach(function(cell) {
       for (var i = 0; i < cell.childNodes.length; i++) {
         var node = cell.childNodes[i];
@@ -226,14 +445,16 @@ var _hmt = _hmt || [];
       <br><br>
 
       <p>
-          Researcher, Ph.D.
+          <span class="lang-en">Researcher, Ph.D.</span>
+          <span class="lang-zh">研究员，博士</span>
       </p>
       <p>
           <!-- <a href="https://vis.baidu.com/#/" target="_blank">Department of Computer Vision Technology (VIS)</a> -->
-          Monetization GenAI, ByteDance Inc.
+          <span class="lang-en">Monetization GenAI, ByteDance Inc.</span>
+          <span class="lang-zh">字节跳动 Monetization GenAI</span>
       </p>
       <p>
-          Email: zhouh156 (at) mail.ustc.edu.cn
+          <span class="lang-en">Email:</span><span class="lang-zh">邮箱：</span> zhouh156 (at) mail.ustc.edu.cn
       </p>
       <p>
           <a class="profile-link" href='https://scholar.google.com/citations?user=xZ-0R3cAAAAJ'><img src="./page_files/img/google-scholar.svg" alt="">Google Scholar</a> / <a class="profile-link" href='https://github.com/Rhythmblue'><img src="./page_files/img/github.svg" alt="">GitHub</a>
@@ -244,48 +465,127 @@ var _hmt = _hmt || [];
 </table>
 
 
-<h2>About Me</h2>
-<p style="text-align:justify;">
-  I am currently a researcher in Bytedance and focus on developing generative AI in the ads tech and creative industry. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022. My supervisors are <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017.
+<h2><span class="lang-en">About Me</span><span class="lang-zh">关于我</span></h2>
+<p class="lang-en" style="text-align:justify;">
+  I am currently a researcher in Bytedance and focus on developing generative AI in the creative industry. Previously at Baidu, I worked on pretraining general vision-language models. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022. My supervisors are <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017.
 </p>
-<p>
+<p class="lang-zh" style="text-align:justify;">
+  我目前在字节跳动担任研究员，主要关注创意行业中的生成式 AI 应用与研发。此前在百度期间，我参与研发通用视觉语言模型的预训练。我于 2022 年在<a href="https://en.ustc.edu.cn/index.htm" target="_blank">中国科学技术大学（USTC）</a>获得博士学位，导师为<a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">周文罡教授</a>和<a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">李厚强教授</a>。此前，我于 2017 年在<a href="https://en.xidian.edu.cn/" target="_blank">西安电子科技大学（XDU）</a>获得学士学位。
+</p>
+<p class="lang-en">
   <!-- My research interests are in computer vision, and I am currently working on cross-modal understanding (image, video and text) with large language models. -->
   My research interests are in computer vision, and I am currently working on video understanding, generation and editing for creative ads.
+</p>
+<p class="lang-zh">
+  我的研究兴趣主要在计算机视觉，目前关注面向广告创意的视频理解、生成与编辑。
 </p>
 
 
 <div id="publications">
 
-<h2>Publications</h2>
+<h2><span class="lang-en">Publications</span><span class="lang-zh">论文发表</span></h2>
 
 
-<p>*Equal contribution, †Corresponding author</p>
+<p><span class="lang-en">*Equal contribution, †Corresponding author</span><span class="lang-zh">*共同一作，†通讯作者</span></p>
 
-<h3>Selected Publications</h3>
-<table id="selected-publications" border="0" width="100%" cellspacing="5">
+<div class="publication-filters" aria-label="Publication filters">
+  <button class="publication-filter is-active" type="button" data-filter="selected" aria-pressed="true">Selected</button>
+  <button class="publication-filter" type="button" data-filter="all" aria-pressed="false">All</button>
+  <button class="publication-filter" type="button" data-filter="multimodal-generation" aria-pressed="false">Multimodal Generation</button>
+  <button class="publication-filter" type="button" data-filter="sign-language" aria-pressed="false">Sign Language Processing</button>
+  <button class="publication-filter" type="button" data-filter="video-understanding" aria-pressed="false">Video Understanding</button>
+</div>
+
+<table id="publications-table" border="0" width="100%" cellspacing="5">
   <tbody>
 
-  <tr>
+  <tr data-tags="selected,multimodal-generation">
       <td>
         <div align="center">
           <img class="responsive-img"  src="./publications/arxiv-2025-jova/framework.jpg" onclick="showPopup(this)" alt="点击图片">
         </div>
       </td>
       <td>
-        JoVA: Unified Multimodal Learning for Joint Video-Audio Generation
+        JoVA: Unified Multimodal Learning for Joint Video-Audio Generation and Editing
         <br>
-        Xiaohu Huang*, <b>Hao Zhou*</b>, Qiangpeng Yang, Shilei Wen, Kai Han
+        Xiaohu Huang*, Haoyang He*, <b>Hao Zhou*</b>, Qiangpeng Yang, Shilei Wen, Kai Han
         <br>
-        arXiv preprint, 2025
+        European Conference on Computer Vision (ECCV), 2026
         <br>
         <a href="https://arxiv.org/pdf/2512.13677" target="_blank">pdf</a>
         <a href="https://visual-ai.github.io/jova/" target="_blank">project</a>
         <a href="https://github.com/Visual-AI/JoVA" target="_blank">code</a>
+        <a class="timeline-toggle" href="#jova-timeline" data-target="jova-timeline" aria-expanded="false">⏱ timeline</a>
+        <div id="jova-timeline" class="paper-timeline" hidden>
+          <ul class="lang-en">
+            <li><b>2025.05</b>: Started investigation into joint video-audio generation.</li>
+            <li><b>2025.06</b>: Officially launched the joint video-audio generation project.</li>
+            <li><b>2025.07.21</b>: Successfully migrated a T2V model into a TV2A model.</li>
+            <li><b>2025.08.01</b>: Verified video-aligned audio generation.</li>
+            <li><b>2025.08.07</b>: Discussed that TTS-style generation was also important, while natural-sound T2VA should be completed first.</li>
+            <li><b>2025.08.17</b>: Found that sharing a single DiT for audio and video did not train well.</li>
+            <li><b>2025.08.23</b>: Found that the cross-attention design could produce preliminary results.</li>
+            <li><b>2025.08.27</b>: Achieved integrated T2VA generation at 480p; used larger downsampling during training to save memory.</li>
+            <li><b>2025.08.30</b>: Verified low-resolution training with high-resolution testing; observed that human voice generation was still weak with the current data.</li>
+            <li><b>2025.09.02</b>: Formed the observation that audio-video caption quality was critical and needed improvement.</li>
+            <li><b>2025.10.29</b>: Successfully combined text-to-video generation with TTS.</li>
+            <li><b>2025.11.09</b>: Achieved audio-lip synchronization for digital humans.</li>
+            <li><b>2025.11</b>: Prepared a CVPR 2026 submission based on the intermediate results.</li>
+            <li><b>2025.11.20</b>: Decided to further add editing capability.</li>
+            <li><b>2025.12</b>: Discussed that adding an extra UMM module under the diffusion framework was not a reasonable path; end-to-end modeling was a better choice.</li>
+            <li><b>2025.12.14</b>: Found that many Chinese film/TV data samples were low-quality, with post-dubbed audio, poor audio-lip alignment, and weak face-level synchronization.</li>
+            <li><b>2025.12.18</b>: Started preparing editing data.</li>
+            <li><b>2026.01.30</b>: Received CVPR reviews and judged that acceptance was unlikely.</li>
+            <li><b>2026.03.17</b>: Completed editing capability training with strong results.</li>
+            <li><b>Later</b>: Continued improving the full generation + editing framework, submitted to ECCV 2026, and was finally accepted.</li>
+          </ul>
+          <ul class="lang-zh">
+            <li><b>2025.05</b>: 启动音视频联合生成方向调研。</li>
+            <li><b>2025.06</b>: 正式启动音视频联合生成项目。</li>
+            <li><b>2025.07.21</b>: 成功将 T2V 模型迁移为 TV2A 模型。</li>
+            <li><b>2025.08.01</b>: 验证了基于视频对齐的音频生成能力。</li>
+            <li><b>2025.08.07</b>: 讨论认为 TTS 类型生成也很重要，但需要优先完成自然界声音的 T2VA。</li>
+            <li><b>2025.08.17</b>: 发现音视频共用一组 DiT 训练效果不理想。</li>
+            <li><b>2025.08.23</b>: 发现 cross-attention 方案开始能够产生初步效果。</li>
+            <li><b>2025.08.27</b>: 在 480p 上实现 T2VA 的音视频一体化生成；为节省显存，训练时采用更大的下采样。</li>
+            <li><b>2025.08.30</b>: 完成低分辨率训练到高分辨率测试的验证；发现当前数据下人声生成效果仍不理想。</li>
+            <li><b>2025.09.02</b>: 形成阶段性观察：音视频 caption 质量非常关键，需要进一步提升。</li>
+            <li><b>2025.10.29</b>: 成功完成文生视频与 TTS 能力的结合。</li>
+            <li><b>2025.11.09</b>: 成功实现数字人口型与声音对齐。</li>
+            <li><b>2025.11</b>: 基于阶段性结果准备投稿 CVPR 2026。</li>
+            <li><b>2025.11.20</b>: 决定进一步加入 editing 能力。</li>
+            <li><b>2025.12</b>: 讨论认为在 diffusion 框架下额外引入 UMM 并不是合理方案，相比之下，直接采用端到端建模路径更合适。</li>
+            <li><b>2025.12.14</b>: 发现大量中文影视数据质量较差，声音多为后期配音，音频与口型对齐差，且不够贴脸。</li>
+            <li><b>2025.12.18</b>: 启动 editing 数据制作。</li>
+            <li><b>2026.01.30</b>: 收到 CVPR 反馈，判断录用希望较小，大概率拒稿。</li>
+            <li><b>2026.03.17</b>: 完成 editing 能力训练，效果较好。</li>
+            <li><b>后续</b>: 基于 generation + editing 的完整能力继续完善工作，并投稿 ECCV 2026，最终被接收。</li>
+          </ul>
+        </div>
 	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
       </td>
   </tr>
 
-  <tr>
+  <tr data-tags="sign-language">
+      <td>
+        <div align="center">
+          <img class="responsive-img"  src="./publications/tomm-2026-raslt/intro.jpg" onclick="showPopup(this)" alt="点击图片">
+        </div>
+      </td>
+      <td>
+        Retrieval-Augmented Sign Language Translation
+        <br>
+        Huijie Yao, Wengang Zhou, <b>Hao Zhou</b>, Hezhen Hu, Houqiang Li
+        <br>
+        ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 2026
+        <br>
+        <a href="https://doi.org/10.1145/3771277" target="_blank">doi</a>
+        <a href="https://dblp.org/rec/journals/tomccap/YaoZZHL26" target="_blank">dblp</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+      </td>
+  </tr>
+
+  <tr data-tags="selected,multimodal-generation,video-understanding">
       <td>
         <div align="center">
           <img class="responsive-img"  src="./publications/acl-2025-prunevid/framework.png" onclick="showPopup(this)" alt="点击图片">
@@ -304,7 +604,49 @@ var _hmt = _hmt || [];
       </td>
   </tr>
 
-  <tr>
+  <tr data-tags="video-understanding">
+      <td>
+        <div align="center">
+          <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
+          <img class="responsive-img"  src="./publications/cvpr-2025-change3d/framework.png" onclick="showPopup(this)" alt="点击图片">
+        </div>
+      </td>
+      <td>
+        Change3D: Revisiting Change Detection and Captioning from A Video Modeling Perspective
+        <br>
+        Duowang Zhu, Xiaohu Huang, Haiyan Huang, <b>Hao Zhou</b>, Zhenfeng Shao
+        <br>
+        IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), <b>Highlight</b>, 2025
+        <br>
+        <a href="https://arxiv.org/pdf/2503.18803" target="_blank">pdf</a>
+        <a href="https://github.com/zhuduowang/Change3D" target="_blank">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+      </td>
+  </tr>
+
+  <tr data-tags="video-understanding">
+      <td>
+        <div align="center">
+          <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
+          <img class="responsive-img"  src="./publications/ijcv-2025-skimfocusnet/intro.png" onclick="showPopup(this)" alt="点击图片">
+
+        </div>
+      </td>
+      <td>
+        <!-- <b> -->
+        Skim then Focus: Integrating Contextual and Fine-grained Views for Repetitive Action Counting
+
+        <!-- </b> -->
+        <br>
+        Zhengqi Zhao*, Xiaohu Huang*, <strong>Hao Zhou†</strong>, Kun Yao, Errui Ding, Jingdong Wang, Xinggang Wang, Wenyu Liu, Bin Feng†
+        <br>
+        International Journal of Computer Vision (IJCV), 2025
+        <br>
+        <a href="https://arxiv.org/pdf/2406.08814" target="_blank">pdf</a>
+      </td>
+  </tr>
+
+  <tr data-tags="selected,multimodal-generation">
       <td>
         <div align="center">
           <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
@@ -327,94 +669,7 @@ var _hmt = _hmt || [];
       </td>
   </tr>
 
-  <tr>
-    <td>
-      <div align="center">
-        <img class="responsive-img" src="./publications/cvpr-2021-signbt/intro.png" onclick="showPopup(this)" alt="点击图片">
-      </div>
-    </td>
-    <td>
-      <!-- <b> -->
-        Improving Sign Language Translation with Monolingual Data by Sign Back-Translation
-      <!-- </b> -->
-      <br>
-      <b>Hao Zhou</b>, Wengang Zhou, Weizhen Qi, Junfu Pu, Houqiang Li
-      <br>
-      IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
-      <br>
-      <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank">pdf</a>
-    </td>
-  </tr>
-
-  </tbody>
-</table>
-
-<h3>Other Publications</h3>
-<table border="0" width="100%" cellspacing="5">
-  <tbody>
-
-  <tr>
-      <td>
-        <div align="center">
-          <img class="responsive-img"  src="./publications/tomm-2026-raslt/intro.jpg" onclick="showPopup(this)" alt="点击图片">
-        </div>
-      </td>
-      <td>
-        Retrieval-Augmented Sign Language Translation
-        <br>
-        Huijie Yao, Wengang Zhou, <b>Hao Zhou</b>, Hezhen Hu, Houqiang Li
-        <br>
-        ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 2026
-        <br>
-        <a href="https://doi.org/10.1145/3771277" target="_blank">doi</a>
-        <a href="https://dblp.org/rec/journals/tomccap/YaoZZHL26" target="_blank">dblp</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
-      </td>
-  </tr>
-
-  <tr>
-      <td>
-        <div align="center">
-          <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
-          <img class="responsive-img"  src="./publications/cvpr-2025-change3d/framework.png" onclick="showPopup(this)" alt="点击图片">
-        </div>
-      </td>
-      <td>
-        Change3D: Revisiting Change Detection and Captioning from A Video Modeling Perspective
-        <br>
-        Duowang Zhu, Xiaohu Huang, Haiyan Huang, <b>Hao Zhou</b>, Zhenfeng Shao
-        <br>
-        IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), <b>Highlight</b>, 2025
-        <br>
-        <a href="https://arxiv.org/pdf/2503.18803" target="_blank">pdf</a>
-        <a href="https://github.com/zhuduowang/Change3D" target="_blank">code</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
-      </td>
-  </tr>
-
-  <tr>
-      <td>
-        <div align="center">
-          <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
-          <img class="responsive-img"  src="./publications/ijcv-2025-skimfocusnet/intro.png" onclick="showPopup(this)" alt="点击图片">
-
-        </div>
-      </td>
-      <td>
-        <!-- <b> -->
-        Skim then Focus: Integrating Contextual and Fine-grained Views for Repetitive Action Counting
-
-        <!-- </b> -->
-        <br>
-        Zhengqi Zhao*, Xiaohu Huang*, <strong>Hao Zhou†</strong>, Kun Yao, Errui Ding, Jingdong Wang, Xinggang Wang, Wenyu Liu, Bin Feng†
-        <br>
-        International Journal of Computer Vision (IJCV), 2025
-        <br>
-        <a href="https://arxiv.org/pdf/2406.08814" target="_blank">pdf</a>
-      </td>
-  </tr>
-
-  <tr>
+  <tr data-tags="sign-language">
       <td>
         <div align="center">
           <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
@@ -437,7 +692,7 @@ var _hmt = _hmt || [];
       </td>
   </tr>
 
-  <tr>
+  <tr data-tags="video-understanding">
       <td>
         <div align="center">
           <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
@@ -460,7 +715,7 @@ var _hmt = _hmt || [];
       </td>
   </tr>
 
-  <tr>
+  <tr data-tags="video-understanding">
       <td>
         <div align="center">
           <!-- <img class="responsive-img" src="./publications/neurips-2023-hap/intro.jpeg" alt=""> -->
@@ -483,7 +738,7 @@ var _hmt = _hmt || [];
       </td>
   </tr>
 
-  <tr>
+  <tr data-tags="sign-language">
     <td>
       <div align="center">
         <img class="responsive-img" src="./publications/iccv-2023-ipslt/intro.png" onclick="showPopup(this)" alt="点击图片">
@@ -502,7 +757,7 @@ var _hmt = _hmt || [];
     </td>
   </tr>
 
-  <tr>
+  <tr data-tags="video-understanding">
     <td>
       <div align="center">
         <img class="responsive-img" src="./publications/iclr-2023-skeletongcl/framework.png" onclick="showPopup(this)" alt="点击图片">
@@ -522,7 +777,7 @@ var _hmt = _hmt || [];
     </td>
   </tr>
 
-  <tr>
+  <tr data-tags="sign-language">
     <td>
       <div align="center">
         <img class="responsive-img" src="./publications/tmm-2021-stmct/intro.png" onclick="showPopup(this)" alt="点击图片">
@@ -541,7 +796,27 @@ var _hmt = _hmt || [];
     </td>
   </tr>
 
-  <tr>
+  <tr data-tags="selected,sign-language">
+    <td>
+      <div align="center">
+        <img class="responsive-img" src="./publications/cvpr-2021-signbt/intro.png" onclick="showPopup(this)" alt="点击图片">
+      </div>
+    </td>
+    <td>
+      <!-- <b> -->
+        Improving Sign Language Translation with Monolingual Data by Sign Back-Translation
+      <!-- </b> -->
+      <br>
+      <b>Hao Zhou</b>, Wengang Zhou, Weizhen Qi, Junfu Pu, Houqiang Li
+      <br>
+      IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
+      <br>
+      <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank">pdf</a>
+      <a href="https://scholar.google.com/scholar?q=%22Improving%20Sign%20Language%20Translation%20with%20Monolingual%20Data%20by%20Sign%20Back-Translation%22" target="_blank">citation</a>
+    </td>
+  </tr>
+
+  <tr data-tags="sign-language">
     <td>
       <div align="center">
         <img class="responsive-img" src="./publications/aaai-2020-stmcr/framework.png" onclick="showPopup(this)" alt="点击图片">
@@ -560,7 +835,7 @@ var _hmt = _hmt || [];
     </td>
   </tr>
 
-  <tr>
+  <tr data-tags="sign-language">
     <td>
       <div align="center">
         <img class="responsive-img" src="./publications/icme-2019-dpd/framework.png" onclick="showPopup(this)" alt="点击图片">
@@ -585,10 +860,12 @@ var _hmt = _hmt || [];
 </div>
 
 
-<h2>Academic Services</h2>
+<h2><span class="lang-en">Academic Services</span><span class="lang-zh">学术服务</span></h2>
 <table id="tbServices" border="0" width="100%">
   <tbody>
-Invited Reviewer for Journals and Conferences:
+    <tr>
+      <td><span class="lang-en">Invited Reviewer for Journals and Conferences:</span><span class="lang-zh">期刊与会议受邀审稿人：</span></td>
+    </tr>
     <tr>
       <td>   &nbsp; IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)  </td>
     </tr>
@@ -601,11 +878,15 @@ Invited Reviewer for Journals and Conferences:
     </tr>
 
     <tr>
-      <td>   &nbsp; IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024, 2025  </td>
+      <td>   &nbsp; IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2024, 2025, 2026  </td>
     </tr>
 
     <tr>
       <td>   &nbsp; International Conference on Computer Vision (ICCV), 2025  </td>
+    </tr>
+
+    <tr>
+      <td>   &nbsp; European Conference on Computer Vision (ECCV), 2026  </td>
     </tr>
 
     <tr>
@@ -624,49 +905,52 @@ Invited Reviewer for Journals and Conferences:
 </table>
 
 
-<h2>Working Experience</h2>
-<table id="tbExperiences" border="0" width="100%">
+<h2><span class="lang-en">Working Experience</span><span class="lang-zh">工作经历</span></h2>
+<table id="tbExperiences" class="experience-table" border="0" width="100%">
   <tbody>
     <tr>
-      <td> Jan. 2025 - Present  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Researcher, Monetization GenAI, Bytedance </td>
+      <td class="experience-date"><span class="lang-en">Jan. 2025 - Present</span><span class="lang-zh">2025.01 - 至今</span></td>
+      <td><span class="lang-en">Researcher, Monetization GenAI, Bytedance</span><span class="lang-zh">研究员，Monetization GenAI，字节跳动</span></td>
     </tr>
 
     <tr>
-      <td> July. 2022 - Dec. 2024  &nbsp;&nbsp;&nbsp;&nbsp; Researcher, Department of Computer Vision Technology (VIS), Baidu </td>
+      <td class="experience-date"><span class="lang-en">July. 2022 - Dec. 2024</span><span class="lang-zh">2022.07 - 2024.12</span></td>
+      <td><span class="lang-en">Researcher, Department of Computer Vision Technology (VIS), Baidu</span><span class="lang-zh">研究员，计算机视觉技术部（VIS），百度</span></td>
     </tr>
 
     <tr>
-      <td> May. 2019 - July. 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Research Intern, BigData Group, Baidu</td>
+      <td class="experience-date"><span class="lang-en">May. 2019 - July. 2019</span><span class="lang-zh">2019.05 - 2019.07</span></td>
+      <td><span class="lang-en">Research Intern, BigData Group, Baidu; Spatio-temporal Knowledge Graph</span><span class="lang-zh">研究实习生，BigData Group，百度；时空知识图谱研究</span></td>
     </tr>
   </tbody>
 </table>
 
-<h2>Teaching Experience</h2>
+<h2><span class="lang-en">Teaching Experience</span><span class="lang-zh">教学经历</span></h2>
 <table id="tbExperiences" border="0" width="100%">
   <tbody>
     <tr>
-      <td> Spring 2020  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02, <a href="https://ustc-dia.github.io/" target="_blank">Digital Image Analysis</a> </td>
+      <td><span class="lang-en">Spring 2020  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02, <a href="https://ustc-dia.github.io/" target="_blank">Digital Image Analysis</a></span><span class="lang-zh">2020 春季  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02，<a href="https://ustc-dia.github.io/" target="_blank">数字图像分析</a></span></td>
     </tr>
     <tr>
-      <td> Spring 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01, <a href="https://ustc-dip.github.io" target="_blank"> Digital Image Processing B </a> </td>
+      <td><span class="lang-en">Spring 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01, <a href="https://ustc-dip.github.io" target="_blank">Digital Image Processing B</a></span><span class="lang-zh">2019 春季  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01，<a href="https://ustc-dip.github.io" target="_blank">数字图像处理 B</a></span></td>
     </tr>
 </tbody>
 </table>
 
-<h2>Awards</h2>
+<h2><span class="lang-en">Awards</span><span class="lang-zh">获奖</span></h2>
 <table id="tbAwards" border="0" width="100%">
   <tbody>
 
     <tr>
-      <td> 2021  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Runner-up (2/132), ChaLearn LAP Large Scale Signer Independent Isolated SLR Challenge, CVPR</td>
+      <td><span class="lang-en">2021  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Runner-up (2/132), ChaLearn LAP Large Scale Signer Independent Isolated SLR Challenge, CVPR</span><span class="lang-zh">2021  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 亚军（2/132），ChaLearn LAP Large Scale Signer Independent Isolated SLR Challenge，CVPR</span></td>
     </tr>
 
     <tr>
-      <td> 2017  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Outstanding Graduate Student, XDU</td>
+      <td><span class="lang-en">2017  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Outstanding Graduate Student, XDU</span><span class="lang-zh">2017  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 优秀毕业生，西安电子科技大学</span></td>
     </tr>
 
     <tr>
-      <td> 2014  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; National Scholarship, Ministry of Education, PRC </td>
+      <td><span class="lang-en">2014  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; National Scholarship, Ministry of Education, PRC</span><span class="lang-zh">2014  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 国家奖学金，中华人民共和国教育部</span></td>
     </tr>
   </tbody>
 </table>
