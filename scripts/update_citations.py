@@ -64,7 +64,7 @@ def update_html(html, citation_id, count):
     )
 
     def replace(match):
-        return f"{match.group(1)}citation: {count}{match.group(3)}"
+        return f"{match.group(1)}Cited by {count}{match.group(3)}"
 
     updated, num_replacements = pattern.subn(replace, html)
     if num_replacements != 1:
