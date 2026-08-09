@@ -250,24 +250,12 @@ th, td {
 }
 
 .language-icon {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    width: 22px;
+    display: inline-block;
     font-family: Arial, "Microsoft YaHei", sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     line-height: 1;
-}
-
-.language-icon span:first-child {
     color: #1f5f9f;
-    text-align: right;
-}
-
-.language-icon span:last-child {
-    color: #111;
-    text-align: left;
 }
 
 body[data-lang="en"] .lang-zh,
@@ -311,7 +299,7 @@ var _hmt = _hmt || [];
 
   <div class="language-switch" aria-label="Language switch">
     <button id="language-toggle" type="button" title="Switch between English and Chinese">
-      <span class="language-icon" aria-hidden="true"><span>文</span><span>A</span></span>
+      <span class="language-icon" id="language-icon" aria-hidden="true">中文</span>
     </button>
   </div>
 
@@ -346,6 +334,7 @@ var _hmt = _hmt || [];
 
   document.addEventListener("DOMContentLoaded", function() {
     var langToggle = document.getElementById("language-toggle");
+    var langIcon = document.getElementById("language-icon");
     var savedLang = "en";
 
     try {
@@ -361,6 +350,7 @@ var _hmt = _hmt || [];
       document.title = lang === "zh" ? "周浩 - 个人主页" : "Hao Zhou - Homepage";
       langToggle.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换到中文");
       langToggle.setAttribute("title", lang === "zh" ? "Switch to English" : "切换到中文");
+      langIcon.textContent = lang === "zh" ? "EN" : "中文";
       try {
         localStorage.setItem("homepage-lang", lang);
       } catch (error) {
@@ -467,10 +457,10 @@ var _hmt = _hmt || [];
 
 <h2><span class="lang-en">About Me</span><span class="lang-zh">关于我</span></h2>
 <p class="lang-en" style="text-align:justify;">
-  I am currently a researcher in Bytedance and focus on developing generative AI in the creative industry. Previously at Baidu, I worked on pretraining general vision-language models. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022. My supervisors are <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017.
+  I am currently a researcher in Bytedance and focus on developing generative AI in the creative industry. Previously at Baidu, I worked on pretraining general vision-language models. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022, under the supervision of <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. During my Ph.D., I mainly studied video-based sign language translation. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017.
 </p>
 <p class="lang-zh" style="text-align:justify;">
-  我目前在字节跳动担任研究员，主要关注创意行业中的生成式 AI 应用与研发。此前在百度期间，我参与研发通用视觉语言模型的预训练。我于 2022 年在<a href="https://en.ustc.edu.cn/index.htm" target="_blank">中国科学技术大学（USTC）</a>获得博士学位，导师为<a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">周文罡教授</a>和<a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">李厚强教授</a>。此前，我于 2017 年在<a href="https://en.xidian.edu.cn/" target="_blank">西安电子科技大学（XDU）</a>获得学士学位。
+  我目前在字节跳动担任研究员，主要关注创意行业中的生成式 AI 应用与研发。此前在百度期间，我参与研发通用视觉语言模型的预训练。我于 2022 年在<a href="https://en.ustc.edu.cn/index.htm" target="_blank">中国科学技术大学（USTC）</a>获得博士学位，导师为<a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">周文罡教授</a>和<a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">李厚强教授</a>。博士期间，我主要研究基于视频的手语翻译。此前，我于 2017 年在<a href="https://en.xidian.edu.cn/" target="_blank">西安电子科技大学（XDU）</a>获得学士学位。
 </p>
 <p class="lang-en">
   <!-- My research interests are in computer vision, and I am currently working on cross-modal understanding (image, video and text) with large language models. -->
@@ -812,7 +802,7 @@ var _hmt = _hmt || [];
       IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
       <br>
       <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank">pdf</a>
-      <a href="https://scholar.google.com/scholar?q=%22Improving%20Sign%20Language%20Translation%20with%20Monolingual%20Data%20by%20Sign%20Back-Translation%22" target="_blank">citation</a>
+      <a href="https://scholar.google.com/scholar?q=%22Improving%20Sign%20Language%20Translation%20with%20Monolingual%20Data%20by%20Sign%20Back-Translation%22" target="_blank" data-citation-id="signbt-cvpr2021">citation</a>
     </td>
   </tr>
 
