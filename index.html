@@ -2,8 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" slick-uniqueid="3">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="Hao Zhou, 周浩">
 <meta name="description" content="Hao Zhou&#39;s home page">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./page_files/style/jemdoc.css" type="text/css">
 <style type="text/css">
 </style>
@@ -37,6 +41,7 @@
   height: 100%;
   max-width: 100%;
   max-height: 100%;
+  cursor: zoom-out;
 }
 
 /* 背景遮罩样式 */
@@ -59,6 +64,7 @@
       border: 1px solid #e5e7eb;
       border-radius: 4px;
       background: #fff;
+      cursor: zoom-in;
 }
 
 th, td {
@@ -135,6 +141,28 @@ th, td {
     text-decoration: none;
 }
 
+#publications .author-link {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-decoration: none;
+}
+
+#publications .author-link:hover,
+#publications .author-link:focus {
+    border: 0;
+    background: transparent;
+    color: #1f5f9f;
+    text-decoration: underline;
+    outline: none;
+}
+
 #publications .paper-timeline {
     margin: 8px 0 2px 0;
     padding: 8px 10px;
@@ -199,28 +227,80 @@ th, td {
     vertical-align: -2px;
 }
 
-.experience-table td {
-    padding: 2px 5px;
-    vertical-align: top;
+.experience-list {
+    margin-top: -2px;
+}
+
+.experience-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 13px 0;
+    border-bottom: 1px solid #edf0f2;
+}
+
+.experience-item:first-child {
+    padding-top: 2px;
+}
+
+.experience-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.experience-main {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 13px;
+}
+
+.company-logo {
+    box-sizing: border-box;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    object-fit: contain;
+}
+
+.experience-company {
+    margin-bottom: 2px;
+    color: #212529;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.experience-role {
+    color: #495057;
+    font-size: 14px;
+    line-height: 1.45;
 }
 
 .experience-date {
-    width: 175px;
+    flex: 0 0 auto;
+    color: #6c757d;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: right;
     white-space: nowrap;
 }
 
 .language-switch {
     position: fixed;
-    top: 14px;
-    right: 18px;
+    top: 13px;
+    right: max(18px, calc((100vw - 992px) / 2));
     z-index: 10000;
     display: flex;
     align-items: center;
-    padding: 6px;
-    border: 1px solid #d8dde6;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 0;
+    border: 0;
+    background: transparent;
     font-family: Arial, "Microsoft YaHei", sans-serif;
     font-size: 12px;
     line-height: 1.35;
@@ -270,12 +350,377 @@ body[data-lang="zh"] .lang-en {
     }
 
     .language-switch {
-        position: static;
-        justify-content: flex-end;
-        margin: 0 0 12px auto;
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        z-index: 10000;
+        margin: 0;
         width: fit-content;
     }
 
+}
+
+/* Reference-inspired card layout */
+html {
+    background: #f3f5f7;
+}
+
+.welcome-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9990;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.62);
+    background: rgba(255, 255, 255, 0.58);
+    box-shadow: 0 2px 10px rgba(31, 41, 55, 0.08);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    backdrop-filter: blur(16px) saturate(145%);
+}
+
+.welcome-inner {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1040px;
+    min-height: 56px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.welcome-title {
+    color: #212529;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+body {
+    box-sizing: border-box;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 84px 24px 56px;
+    background: transparent;
+    color: #212529;
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Microsoft YaHei", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.55;
+}
+
+#layout-content {
+    margin-top: 0 !important;
+    padding: 0;
+    background: transparent;
+}
+
+.homepage-grid {
+    display: block;
+}
+
+.profile-column {
+    position: static;
+}
+
+.main-column {
+    min-width: 0;
+}
+
+.content-card {
+    box-sizing: border-box;
+    margin: 0 0 24px;
+    padding: 24px;
+    border: 0;
+    border-radius: 0.8rem;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(31, 41, 55, 0.09);
+}
+
+#layout-content .content-card > h2:first-child {
+    margin-top: 0;
+}
+
+#layout-content h1,
+#layout-content h2,
+#layout-content h3 {
+    border-bottom: 0;
+    letter-spacing: 0;
+}
+
+#layout-content h2 {
+    margin: 0 0 14px;
+    padding: 0;
+    color: #212529;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.profile-card {
+    padding: 36px 28px 24px;
+    text-align: left;
+}
+
+.profile-about {
+    margin-top: 28px;
+}
+
+.profile-card table {
+    width: 100%;
+    margin: 0;
+}
+
+.profile-card td {
+    width: 100% !important;
+    height: auto;
+    padding: 0;
+    text-align: left;
+}
+
+#layout-content .profile-name {
+    margin: 0 0 16px;
+    padding: 0;
+    color: #212529;
+    font-family: inherit;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.profile-name-zh {
+    display: inline;
+    margin-left: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.profile-card td > p {
+    margin-bottom: 6px;
+    color: #495057;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.profile-card td > p:nth-of-type(1) {
+    margin-bottom: 4px;
+    color: #343a40;
+    font-size: 16px;
+}
+
+.profile-card .profile-links {
+    display: flex;
+    justify-content: flex-start;
+    gap: 14px;
+    margin: 0;
+}
+
+.profile-card .profile-link {
+    gap: 5px;
+    color: #224b8d;
+    font-size: 12px;
+}
+
+.profile-contact-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #edf0f2;
+}
+
+.profile-email {
+    color: #495057;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.content-card p:last-child,
+.content-card table:last-child {
+    margin-bottom: 0;
+}
+
+#publications h2 {
+    margin-bottom: 14px;
+}
+
+#publications h3 {
+    margin: 12px 0 6px;
+    padding: 0;
+    border-bottom: 0;
+    color: #212529;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+#publications table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+#publications td {
+    padding: 12px 6px;
+    border-bottom: 1px solid #eef0f2;
+    color: #495057;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#publications tr:last-child td {
+    border-bottom: 0;
+}
+
+#publications td:first-child {
+    width: 190px;
+    padding-left: 0;
+    padding-right: 14px;
+}
+
+#publications .pub-title {
+    color: #212529;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.responsive-img {
+    width: 180px;
+    max-width: 100%;
+    height: 108px;
+    max-height: none;
+    border: 0;
+    border-radius: 7px;
+    background: #f8f9fa;
+    object-fit: contain;
+}
+
+.publication-filters {
+    gap: 7px;
+    margin-bottom: 4px;
+}
+
+.publication-filter {
+    padding: 4px 10px;
+    border: 0;
+    border-radius: 6px;
+    background: #f1f3f5;
+    color: #495057;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.publication-filter:hover,
+.publication-filter:focus {
+    border: 0;
+    background: #e9ecef;
+}
+
+.publication-filter.is-active {
+    border: 0;
+    background: #224b8d;
+    color: #fff;
+}
+
+#publications a {
+    margin-top: 4px;
+    padding: 1px 7px;
+    border-color: #dce4ed;
+    border-radius: 5px;
+    background: #f8fafc;
+    color: #224b8d;
+}
+
+#tbServices td,
+#tbExperiences td,
+#tbTeaching td,
+#tbAwards td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #343a40;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+@media (max-width: 820px) {
+    .profile-card .profile-name-zh {
+        display: inline;
+        margin-left: 8px;
+    }
+}
+
+@media (max-width: 620px) {
+    body {
+        padding: 74px 10px 32px;
+        font-size: 15px;
+    }
+
+    .welcome-inner {
+        min-height: 54px;
+        padding: 0 12px 0 16px;
+    }
+
+    .welcome-title {
+        font-size: 14px;
+    }
+
+    .content-card {
+        margin-bottom: 14px;
+        padding: 20px 17px;
+        border-radius: 0.7rem;
+    }
+
+    #layout-content .profile-name {
+        font-size: 23px;
+    }
+
+    .profile-name-zh {
+        font-size: 18px;
+    }
+
+    #layout-content h2 {
+        margin-bottom: 12px;
+        font-size: 17px;
+    }
+
+    #publications td:first-child {
+        width: 34%;
+        padding-right: 10px;
+    }
+
+    .responsive-img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 5 / 3;
+    }
+
+    .experience-date {
+        max-width: 102px;
+        font-size: 12px;
+        white-space: normal;
+    }
+
+    .experience-item {
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 0;
+    }
+
+    .experience-main {
+        gap: 10px;
+    }
+
+    .company-logo {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+        padding: 0;
+    }
 }
 
 </style>
@@ -297,6 +742,14 @@ var _hmt = _hmt || [];
 
 <body data-lang="en">
 
+  <div class="welcome-bar" role="banner">
+    <div class="welcome-inner">
+      <div class="welcome-title">
+        <span class="lang-en">Welcome to Hao Zhou's Homepage</span>
+        <span class="lang-zh">欢迎来到周浩的个人主页</span>
+      </div>
+    </div>
+  </div>
   <div class="language-switch" aria-label="Language switch">
     <button id="language-toggle" type="button" title="Switch between English and Chinese">
       <span class="language-icon" id="language-icon" aria-hidden="true">中文</span>
@@ -323,14 +776,17 @@ var _hmt = _hmt || [];
     overlay.style.display = "block";
   }
 
-  document.querySelector(".overlay").addEventListener("click", function() {
+  function closePopup() {
     var popup = document.getElementById("popup");
     var overlay = document.querySelector(".overlay");
 
     // 隐藏弹出框和背景遮罩
     popup.style.display = "none";
     overlay.style.display = "none";
-  });
+  }
+
+  document.querySelector(".overlay").addEventListener("click", closePopup);
+  document.getElementById("popup-image").addEventListener("click", closePopup);
 
   document.addEventListener("DOMContentLoaded", function() {
     var langToggle = document.getElementById("language-toggle");
@@ -423,6 +879,9 @@ var _hmt = _hmt || [];
 
 <div id="layout-content" style="margin-top:25px">
 
+<div class="homepage-grid">
+<div class="profile-column">
+<div class="content-card profile-card">
 <table>
 <tbody>
   <tr>
@@ -431,36 +890,27 @@ var _hmt = _hmt || [];
     </td> -->
 
     <td width="60%" valign="top" height="193">
-      <b><font face="Times New Roman" size="6">Hao Zhou </font><font size="5.5" face="楷体_GB2312"> &nbsp 周 浩</font><font face="Times New Roman" size="6"></font></b>
-      <br><br>
+      <h1 class="profile-name">Hao Zhou <span class="profile-name-zh">周 浩</span></h1>
 
       <p>
           <span class="lang-en">Researcher, Ph.D.</span>
           <span class="lang-zh">研究员，博士</span>
       </p>
       <p>
-          <!-- <a href="https://vis.baidu.com/#/" target="_blank">Department of Computer Vision Technology (VIS)</a> -->
+          <!-- <a href="https://vis.baidu.com/#/" target="_blank" rel="noopener noreferrer">Department of Computer Vision Technology (VIS)</a> -->
           <span class="lang-en">Monetization GenAI, ByteDance Inc.</span>
           <span class="lang-zh">字节跳动 Monetization GenAI</span>
-      </p>
-      <p>
-          <span class="lang-en">Email:</span><span class="lang-zh">邮箱：</span> zhouh156 (at) mail.ustc.edu.cn
-      </p>
-      <p>
-          <a class="profile-link" href='https://scholar.google.com/citations?user=xZ-0R3cAAAAJ'><img src="./page_files/img/google-scholar.svg" alt="">Google Scholar</a> / <a class="profile-link" href='https://github.com/Rhythmblue'><img src="./page_files/img/github.svg" alt="">GitHub</a>
       </p>
     </td>
   </tr>
 </tbody>
 </table>
-
-
-<h2><span class="lang-en">About Me</span><span class="lang-zh">关于我</span></h2>
+<div class="profile-about">
 <p class="lang-en" style="text-align:justify;">
-  I am currently a researcher in Bytedance and focus on developing generative AI in the creative industry. Previously at Baidu, I worked on pretraining general vision-language models. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank">University of Science and Technology of China (USTC)</a> in 2022, under the supervision of <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">Prof. Houqiang Li</a>. During my Ph.D., I mainly studied video-based sign language translation. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank">Xidian University (XDU)</a> in 2017.
+  I am currently a researcher in Bytedance and focus on developing generative AI in the creative industry. Previously at Baidu, I worked on pretraining general vision-language models. I obtained my Ph.D. degree in <a href="https://en.ustc.edu.cn/index.htm" target="_blank" rel="noopener noreferrer">University of Science and Technology of China (USTC)</a> in 2022, under the supervision of <a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Prof. Wengang Zhou</a> and <a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Prof. Houqiang Li</a>. During my Ph.D., I mainly studied video-based sign language translation. Prior to that, I received my B.S. degree from <a href="https://en.xidian.edu.cn/" target="_blank" rel="noopener noreferrer">Xidian University (XDU)</a> in 2017.
 </p>
 <p class="lang-zh" style="text-align:justify;">
-  我目前在字节跳动担任研究员，主要关注创意行业中的生成式 AI 应用与研发。此前在百度期间，我参与研发通用视觉语言模型的预训练。我于 2022 年在<a href="https://en.ustc.edu.cn/index.htm" target="_blank">中国科学技术大学（USTC）</a>获得博士学位，导师为<a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank">周文罡教授</a>和<a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank">李厚强教授</a>。博士期间，我主要研究基于视频的手语翻译。此前，我于 2017 年在<a href="https://en.xidian.edu.cn/" target="_blank">西安电子科技大学（XDU）</a>获得学士学位。
+  我目前在字节跳动担任研究员，主要关注创意行业中的生成式 AI 应用与研发。此前在百度期间，我参与研发通用视觉语言模型的预训练。我于 2022 年在<a href="https://en.ustc.edu.cn/index.htm" target="_blank" rel="noopener noreferrer">中国科学技术大学（USTC）</a>获得博士学位，导师为<a href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">周文罡教授</a>和<a href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">李厚强教授</a>。博士期间，我主要研究基于视频的手语翻译。此前，我于 2017 年在<a href="https://en.xidian.edu.cn/" target="_blank" rel="noopener noreferrer">西安电子科技大学（XDU）</a>获得学士学位。
 </p>
 <p class="lang-en">
   <!-- My research interests are in computer vision, and I am currently working on cross-modal understanding (image, video and text) with large language models. -->
@@ -469,9 +919,59 @@ var _hmt = _hmt || [];
 <p class="lang-zh">
   我的研究兴趣主要在计算机视觉，目前关注面向广告创意的视频理解、生成与编辑。
 </p>
+</div>
+<div class="profile-contact-row">
+  <div class="profile-email"><span class="lang-en">Email:</span><span class="lang-zh">邮箱：</span> zhouh156 (at) mail.ustc.edu.cn</div>
+  <div class="profile-links">
+    <a class="profile-link" href='https://scholar.google.com/citations?user=xZ-0R3cAAAAJ' target="_blank" rel="noopener noreferrer"><img src="./page_files/img/google-scholar.svg" alt="">Google Scholar</a>
+    <a class="profile-link" href='https://github.com/Rhythmblue' target="_blank" rel="noopener noreferrer"><img src="./page_files/img/github.svg" alt="">GitHub</a>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="main-column">
+
+<div class="content-card">
+<h2><span class="lang-en">Working Experience</span><span class="lang-zh">工作经历</span></h2>
+<div id="tbExperiences" class="experience-list">
+  <div class="experience-item">
+    <div class="experience-main">
+      <img class="company-logo" src="./page_files/img/companies/bytedance.svg" alt="ByteDance logo">
+      <div>
+        <div class="experience-company">ByteDance</div>
+        <div class="experience-role"><span class="lang-en">Researcher, Monetization GenAI</span><span class="lang-zh">研究员，Monetization GenAI</span></div>
+      </div>
+    </div>
+    <div class="experience-date"><span class="lang-en">Jan. 2025 - Present</span><span class="lang-zh">2025.01 - 至今</span></div>
+  </div>
+
+  <div class="experience-item">
+    <div class="experience-main">
+      <img class="company-logo" src="./page_files/img/companies/baidu.svg" alt="Baidu logo">
+      <div>
+        <div class="experience-company">Baidu</div>
+        <div class="experience-role"><span class="lang-en">Researcher, Department of Computer Vision Technology (VIS)</span><span class="lang-zh">研究员，计算机视觉技术部（VIS）</span></div>
+      </div>
+    </div>
+    <div class="experience-date"><span class="lang-en">Jul. 2022 - Dec. 2024</span><span class="lang-zh">2022.07 - 2024.12</span></div>
+  </div>
+
+  <div class="experience-item">
+    <div class="experience-main">
+      <img class="company-logo" src="./page_files/img/companies/baidu.svg" alt="Baidu logo">
+      <div>
+        <div class="experience-company">Baidu</div>
+        <div class="experience-role"><span class="lang-en">Research Intern, Big Data Group; Spatio-temporal Knowledge Graph</span><span class="lang-zh">研究实习生，Big Data Group；时空知识图谱研究</span></div>
+      </div>
+    </div>
+    <div class="experience-date"><span class="lang-en">May 2019 - Jul. 2019</span><span class="lang-zh">2019.05 - 2019.07</span></div>
+  </div>
+</div>
+</div>
 
 
-<div id="publications">
+<div id="publications" class="content-card">
 
 <h2><span class="lang-en">Publications</span><span class="lang-zh">论文发表</span></h2>
 
@@ -492,19 +992,19 @@ var _hmt = _hmt || [];
   <tr data-tags="selected,multimodal-generation">
       <td>
         <div align="center">
-          <img class="responsive-img"  src="./publications/arxiv-2025-jova/framework.jpg" onclick="showPopup(this)" alt="点击图片">
+          <img class="responsive-img" src="./publications/arxiv-2025-jova/jova-method.png" onclick="showPopup(this)" alt="点击图片">
         </div>
       </td>
       <td>
         JoVA: Unified Multimodal Learning for Joint Video-Audio Generation and Editing
         <br>
-        Xiaohu Huang*, Haoyang He*, <b>Hao Zhou*</b>, Qiangpeng Yang, Shilei Wen, Kai Han
+        <a class="author-link" href="https://oliverhxh.github.io/" target="_blank" rel="noopener noreferrer">Xiaohu Huang*</a>, <a class="author-link" href="https://scholar.google.com/citations?user=8NfQv1sAAAAJ" target="_blank" rel="noopener noreferrer">Haoyang He*</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou*</b></a>, Qiangpeng Yang, <a class="author-link" href="https://scholar.google.com/citations?user=zKtYrHYAAAAJ" target="_blank" rel="noopener noreferrer">Shilei Wen</a>, <a class="author-link" href="https://www.kaihan.org/" target="_blank" rel="noopener noreferrer">Kai Han</a>
         <br>
         European Conference on Computer Vision (ECCV), 2026
         <br>
-        <a href="https://arxiv.org/pdf/2512.13677" target="_blank">pdf</a>
-        <a href="https://visual-ai.github.io/jova/" target="_blank">project</a>
-        <a href="https://github.com/Visual-AI/JoVA" target="_blank">code</a>
+        <a href="https://arxiv.org/pdf/2512.13677" target="_blank" rel="noopener noreferrer">pdf</a>
+        <a href="https://visual-ai.github.io/jova/" target="_blank" rel="noopener noreferrer">project</a>
+        <a href="https://github.com/Visual-AI/JoVA" target="_blank" rel="noopener noreferrer">code</a>
         <a class="timeline-toggle" href="#jova-timeline" data-target="jova-timeline" aria-expanded="false">⏱ timeline</a>
         <div id="jova-timeline" class="paper-timeline" hidden>
           <ul class="lang-en">
@@ -552,7 +1052,7 @@ var _hmt = _hmt || [];
             <li><b>后续</b>: 基于 generation + editing 的完整能力继续完善工作，并投稿 ECCV 2026，最终被接收。</li>
           </ul>
         </div>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -565,13 +1065,12 @@ var _hmt = _hmt || [];
       <td>
         Retrieval-Augmented Sign Language Translation
         <br>
-        Huijie Yao, Wengang Zhou, <b>Hao Zhou</b>, Hezhen Hu, Houqiang Li
+        <a class="author-link" href="https://scholar.google.com/citations?user=H72doW8AAAAJ" target="_blank" rel="noopener noreferrer">Huijie Yao</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Wengang Zhou</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou</b></a>, <a class="author-link" href="https://alexhu.top/" target="_blank" rel="noopener noreferrer">Hezhen Hu</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Houqiang Li</a>
         <br>
         ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 2026
         <br>
-        <a href="https://doi.org/10.1145/3771277" target="_blank">doi</a>
-        <a href="https://dblp.org/rec/journals/tomccap/YaoZZHL26" target="_blank">dblp</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+        <a href="https://doi.org/10.1145/3771277" target="_blank" rel="noopener noreferrer">doi</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -584,13 +1083,13 @@ var _hmt = _hmt || [];
       <td>
         PruneVid: Visual Token Pruning for Efficient Video Large Language Models
         <br>
-        Xiaohu Huang, <b>Hao Zhou</b>, Kai Han
+        <a class="author-link" href="https://oliverhxh.github.io/" target="_blank" rel="noopener noreferrer">Xiaohu Huang</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou</b></a>, <a class="author-link" href="https://www.kaihan.org/" target="_blank" rel="noopener noreferrer">Kai Han</a>
         <br>
         The Annual Meeting of the Association for Computational Linguistics (ACL), Findings, 2025
         <br>
-        <a href="https://arxiv.org/pdf/2412.16117v1" target="_blank">pdf</a>
-        <a href="https://github.com/Visual-AI/PruneVid" target="_blank">code</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+        <a href="https://arxiv.org/pdf/2412.16117v1" target="_blank" rel="noopener noreferrer">pdf</a>
+        <a href="https://github.com/Visual-AI/PruneVid" target="_blank" rel="noopener noreferrer">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -604,13 +1103,13 @@ var _hmt = _hmt || [];
       <td>
         Change3D: Revisiting Change Detection and Captioning from A Video Modeling Perspective
         <br>
-        Duowang Zhu, Xiaohu Huang, Haiyan Huang, <b>Hao Zhou</b>, Zhenfeng Shao
+        <a class="author-link" href="https://zhuduowang.github.io/" target="_blank" rel="noopener noreferrer">Duowang Zhu</a>, <a class="author-link" href="https://oliverhxh.github.io/" target="_blank" rel="noopener noreferrer">Xiaohu Huang</a>, Haiyan Huang, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou</b></a>, <a class="author-link" href="https://jszy.whu.edu.cn/shaozhenfeng/en/index.htm" target="_blank" rel="noopener noreferrer">Zhenfeng Shao</a>
         <br>
         IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), <b>Highlight</b>, 2025
         <br>
-        <a href="https://arxiv.org/pdf/2503.18803" target="_blank">pdf</a>
-        <a href="https://github.com/zhuduowang/Change3D" target="_blank">code</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+        <a href="https://arxiv.org/pdf/2503.18803" target="_blank" rel="noopener noreferrer">pdf</a>
+        <a href="https://github.com/zhuduowang/Change3D" target="_blank" rel="noopener noreferrer">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -628,11 +1127,11 @@ var _hmt = _hmt || [];
 
         <!-- </b> -->
         <br>
-        Zhengqi Zhao*, Xiaohu Huang*, <strong>Hao Zhou†</strong>, Kun Yao, Errui Ding, Jingdong Wang, Xinggang Wang, Wenyu Liu, Bin Feng†
+        Zhengqi Zhao*, <a class="author-link" href="https://oliverhxh.github.io/" target="_blank" rel="noopener noreferrer">Xiaohu Huang*</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><strong>Hao Zhou†</strong></a>, <a class="author-link" href="https://scholar.google.com/citations?user=j9jKpogAAAAJ" target="_blank" rel="noopener noreferrer">Kun Yao</a>, <a class="author-link" href="https://scholar.google.com/citations?user=1wzEtxcAAAAJ" target="_blank" rel="noopener noreferrer">Errui Ding</a>, <a class="author-link" href="https://jingdongwang2017.github.io/" target="_blank" rel="noopener noreferrer">Jingdong Wang</a>, <a class="author-link" href="https://xwcv.github.io/" target="_blank" rel="noopener noreferrer">Xinggang Wang</a>, <a class="author-link" href="https://eic.hust.edu.cn/professor/liuwenyu/" target="_blank" rel="noopener noreferrer">Wenyu Liu</a>, <a class="author-link" href="https://english.eic.hust.edu.cn/info/1018/1212.htm" target="_blank" rel="noopener noreferrer">Bin Feng†</a>
         <br>
         International Journal of Computer Vision (IJCV), 2025
         <br>
-        <a href="https://arxiv.org/pdf/2406.08814" target="_blank">pdf</a>
+        <a href="https://arxiv.org/pdf/2406.08814" target="_blank" rel="noopener noreferrer">pdf</a>
       </td>
   </tr>
 
@@ -649,13 +1148,13 @@ var _hmt = _hmt || [];
           StrucTexTv3: An Efficient Vision-Language Model for Text-rich Image Perception, Comprehension, and Beyond
         <!-- </b> -->
         <br>
-        Pengyuan Lyu*, Yulin Li*, <strong>Hao Zhou,</strong> Weihong Ma, Xingyu Wan, Qunyi Xie, Liang Wu, Chengquan Zhang, Kun Yao, Errui Ding, Jingdong Wang
+        <a class="author-link" href="https://scholar.google.com/citations?user=whvv9NgAAAAJ" target="_blank" rel="noopener noreferrer">Pengyuan Lyu*</a>, Yulin Li*, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><strong>Hao Zhou</strong></a>, Weihong Ma, Xingyu Wan, <a class="author-link" href="https://scholar.google.com/citations?user=JZiUJj6_MJYC" target="_blank" rel="noopener noreferrer">Qunyi Xie</a>, Liang Wu, <a class="author-link" href="https://scholar.google.com/citations?user=koZQ_NgAAAAJ" target="_blank" rel="noopener noreferrer">Chengquan Zhang</a>, <a class="author-link" href="https://scholar.google.com/citations?user=j9jKpogAAAAJ" target="_blank" rel="noopener noreferrer">Kun Yao</a>, <a class="author-link" href="https://scholar.google.com/citations?user=1wzEtxcAAAAJ" target="_blank" rel="noopener noreferrer">Errui Ding</a>, <a class="author-link" href="https://jingdongwang2017.github.io/" target="_blank" rel="noopener noreferrer">Jingdong Wang</a>
         <br>
         arXiv preprint, 2024
         <br>
-        <a href="https://arxiv.org/pdf/2405.21013" target="_blank">pdf</a>
-        <!-- <a href="https://github.com/junkunyuan/HAP" target="_blank">code</a> -->
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+        <a href="https://arxiv.org/pdf/2405.21013" target="_blank" rel="noopener noreferrer">pdf</a>
+        <!-- <a href="https://github.com/junkunyuan/HAP" target="_blank" rel="noopener noreferrer">code</a> -->
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -672,13 +1171,13 @@ var _hmt = _hmt || [];
         Semi-Supervised Spoken Language Glossification
         <!-- </b> -->
         <br>
-        Huijie Yao, Wengang Zhou, <strong>Hao Zhou</strong>, Houqiang Li
+        <a class="author-link" href="https://scholar.google.com/citations?user=H72doW8AAAAJ" target="_blank" rel="noopener noreferrer">Huijie Yao</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Wengang Zhou</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><strong>Hao Zhou</strong></a>, <a class="author-link" href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Houqiang Li</a>
         <br>
         The Annual Meeting of the Association for Computational Linguistics (ACL), 2024
         <br>
-        <a href="https://arxiv.org/pdf/2406.08173" target="_blank">pdf</a>
-        <a href="https://github.com/yaohj11/S3LG" target="_blank">code</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+        <a href="https://arxiv.org/pdf/2406.08173" target="_blank" rel="noopener noreferrer">pdf</a>
+        <a href="https://github.com/yaohj11/S3LG" target="_blank" rel="noopener noreferrer">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -695,13 +1194,13 @@ var _hmt = _hmt || [];
           FROSTER: Frozen CLIP Is A Strong Teacher for Open-Vocabulary Action Recognition
         <!-- </b> -->
         <br>
-        Xiaohu Huang, <strong>Hao Zhou</strong>, Kun Yao, Kai Han
+        <a class="author-link" href="https://oliverhxh.github.io/" target="_blank" rel="noopener noreferrer">Xiaohu Huang</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><strong>Hao Zhou</strong></a>, <a class="author-link" href="https://scholar.google.com/citations?user=j9jKpogAAAAJ" target="_blank" rel="noopener noreferrer">Kun Yao</a>, <a class="author-link" href="https://www.kaihan.org/" target="_blank" rel="noopener noreferrer">Kai Han</a>
         <br>
         International Conference on Learning Representations (ICLR), 2024
         <br>
-        <a href="https://openreview.net/pdf?id=zYXFMeHRtO" target="_blank">pdf</a>
-        <a href="https://github.com/Visual-AI/FROSTER" target="_blank">code</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+        <a href="https://openreview.net/pdf?id=zYXFMeHRtO" target="_blank" rel="noopener noreferrer">pdf</a>
+        <a href="https://github.com/Visual-AI/FROSTER" target="_blank" rel="noopener noreferrer">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -718,13 +1217,13 @@ var _hmt = _hmt || [];
           HAP: Structure-Aware Masked Image Modeling for Human-Centric Perception
         <!-- </b> -->
         <br>
-        Junkun Yuan*, Xinyu Zhang*, <strong>Hao Zhou</strong>, Jian Wang, Zhongwei Qiu, Zhiyin Shao, Shaofeng Zhang, Sifan Long, Kun Kuang, Kun Yao, Junyu Han, Errui Ding, Lanfen Lin, Fei Wu and Jingdong Wang
+        <a class="author-link" href="https://junkunyuan.github.io/" target="_blank" rel="noopener noreferrer">Junkun Yuan*</a>, <a class="author-link" href="https://zhangxinyu-xyz.github.io/" target="_blank" rel="noopener noreferrer">Xinyu Zhang*</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><strong>Hao Zhou</strong></a>, <a class="author-link" href="https://scholar.google.com/citations?user=hDPRTekAAAAJ" target="_blank" rel="noopener noreferrer">Jian Wang</a>, <a class="author-link" href="https://ericzw.github.io/" target="_blank" rel="noopener noreferrer">Zhongwei Qiu</a>, <a class="author-link" href="https://scholar.google.com/citations?user=-hSPgbEAAAAJ" target="_blank" rel="noopener noreferrer">Zhiyin Shao</a>, <a class="author-link" href="https://faculty.ustc.edu.cn/zhangshaofeng1/zh_CN/index.htm" target="_blank" rel="noopener noreferrer">Shaofeng Zhang</a>, <a class="author-link" href="https://faculty.dlut.edu.cn/longsifan/zh_CN/index.htm" target="_blank" rel="noopener noreferrer">Sifan Long</a>, <a class="author-link" href="https://kunkuang.github.io/" target="_blank" rel="noopener noreferrer">Kun Kuang</a>, <a class="author-link" href="https://scholar.google.com/citations?user=j9jKpogAAAAJ" target="_blank" rel="noopener noreferrer">Kun Yao</a>, Junyu Han, <a class="author-link" href="https://scholar.google.com/citations?user=1wzEtxcAAAAJ" target="_blank" rel="noopener noreferrer">Errui Ding</a>, <a class="author-link" href="https://person.zju.edu.cn/0096005" target="_blank" rel="noopener noreferrer">Lanfen Lin</a>, <a class="author-link" href="https://person.zju.edu.cn/wufei" target="_blank" rel="noopener noreferrer">Fei Wu</a> and <a class="author-link" href="https://jingdongwang2017.github.io/" target="_blank" rel="noopener noreferrer">Jingdong Wang</a>
         <br>
         Conference on Neural Information Processing Systems (NeurIPS), 2023
         <br>
-        <a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>
-        <a href="https://github.com/junkunyuan/HAP" target="_blank">code</a>
-	      <!-- <a href="./LightCap/bibtex.txt" target="_blank">bibtex</a>  -->
+        <a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank" rel="noopener noreferrer">pdf</a>
+        <a href="https://github.com/junkunyuan/HAP" target="_blank" rel="noopener noreferrer">code</a>
+	      <!-- <a href="./LightCap/bibtex.txt" target="_blank" rel="noopener noreferrer">bibtex</a>  -->
       </td>
   </tr>
 
@@ -739,11 +1238,11 @@ var _hmt = _hmt || [];
         Sign Language Translation with Iterative Prototype
       <!-- </b> -->
       <br>
-      Huijie Yao, Wengang Zhou, Hao Feng, Hezhen Hu, <strong>Hao Zhou</strong>, Houqiang Li
+      <a class="author-link" href="https://scholar.google.com/citations?user=H72doW8AAAAJ" target="_blank" rel="noopener noreferrer">Huijie Yao</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Wengang Zhou</a>, <a class="author-link" href="https://fh2019ustc.github.io/" target="_blank" rel="noopener noreferrer">Hao Feng</a>, <a class="author-link" href="https://alexhu.top/" target="_blank" rel="noopener noreferrer">Hezhen Hu</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><strong>Hao Zhou</strong></a>, <a class="author-link" href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Houqiang Li</a>
       <br>
       International Conference on Computer Vision (ICCV), 2023
       <br>
-      <a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank">pdf</a>
+      <a href="https://openreview.net/pdf?id=6XPPfZkhKi" target="_blank" rel="noopener noreferrer">pdf</a>
     </td>
   </tr>
 
@@ -758,12 +1257,12 @@ var _hmt = _hmt || [];
         Graph Contrastive Learning for Skeleton-based Action Recognition
       <!-- </b> -->
       <br>
-      Xiaohu Huang, <b>Hao Zhou†</b>, Jian Wang, Haocheng Feng, Junyu Han, Errui Ding, Jingdong Wang, Xinggang Wang, Wenyu Liu, Bin Feng
+      <a class="author-link" href="https://oliverhxh.github.io/" target="_blank" rel="noopener noreferrer">Xiaohu Huang</a>, <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou†</b></a>, <a class="author-link" href="https://scholar.google.com/citations?user=hDPRTekAAAAJ" target="_blank" rel="noopener noreferrer">Jian Wang</a>, <a class="author-link" href="https://scholar.google.com/citations?user=pnuQ5UsAAAAJ" target="_blank" rel="noopener noreferrer">Haocheng Feng</a>, Junyu Han, <a class="author-link" href="https://scholar.google.com/citations?user=1wzEtxcAAAAJ" target="_blank" rel="noopener noreferrer">Errui Ding</a>, <a class="author-link" href="https://jingdongwang2017.github.io/" target="_blank" rel="noopener noreferrer">Jingdong Wang</a>, <a class="author-link" href="https://xwcv.github.io/" target="_blank" rel="noopener noreferrer">Xinggang Wang</a>, <a class="author-link" href="https://eic.hust.edu.cn/professor/liuwenyu/" target="_blank" rel="noopener noreferrer">Wenyu Liu</a>, <a class="author-link" href="https://english.eic.hust.edu.cn/info/1018/1212.htm" target="_blank" rel="noopener noreferrer">Bin Feng</a>
       <br>
       International Conference on Learning Representations (ICLR), 2023
       <br>
-      <a href="https://arxiv.org/pdf/2301.10900.pdf" target="_blank">pdf</a>
-      <a href="https://github.com/OliverHxh/SkeletonGCL" target="_blank">code</a>
+      <a href="https://arxiv.org/pdf/2301.10900.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+      <a href="https://github.com/OliverHxh/SkeletonGCL" target="_blank" rel="noopener noreferrer">code</a>
     </td>
   </tr>
 
@@ -778,11 +1277,11 @@ var _hmt = _hmt || [];
         Spatial-Temporal Multi-Cue Network for Continuous Sign Language Recognition and Translation
       <!-- </b> -->
       <br>
-      <b>Hao Zhou</b>, Wengang Zhou, Yun Zhou, Houqiang Li
+      <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou</b></a>, <a class="author-link" href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Wengang Zhou</a>, <a class="author-link" href="https://scholar.google.com/citations?user=vgJUiHoAAAAJ" target="_blank" rel="noopener noreferrer">Yun Zhou</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Houqiang Li</a>
       <br>
       IEEE Transactions on Multimedia, 2021
       <br>
-      <a href="https://ieeexplore.ieee.org/abstract/document/9354538/" target="_blank">pdf</a>
+      <a href="https://ieeexplore.ieee.org/abstract/document/9354538/" target="_blank" rel="noopener noreferrer">pdf</a>
     </td>
   </tr>
 
@@ -797,12 +1296,12 @@ var _hmt = _hmt || [];
         Improving Sign Language Translation with Monolingual Data by Sign Back-Translation
       <!-- </b> -->
       <br>
-      <b>Hao Zhou</b>, Wengang Zhou, Weizhen Qi, Junfu Pu, Houqiang Li
+      <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou</b></a>, <a class="author-link" href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Wengang Zhou</a>, <a class="author-link" href="https://qiweizhen.github.io/" target="_blank" rel="noopener noreferrer">Weizhen Qi</a>, <a class="author-link" href="https://pujunfu.github.io/" target="_blank" rel="noopener noreferrer">Junfu Pu</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Houqiang Li</a>
       <br>
       IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2021
       <br>
-      <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank">pdf</a>
-      <a href="https://scholar.google.com/scholar?cites=6271085228002524231&as_sdt=2005&sciodt=0,5&hl=en" target="_blank" data-citation-id="signbt-cvpr2021">Cited by 541</a>
+      <a href="https://openaccess.thecvf.com/content/CVPR2021/papers/Zhou_Improving_Sign_Language_Translation_With_Monolingual_Data_by_Sign_Back-Translation_CVPR_2021_paper.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
+      <a href="https://scholar.google.com/scholar?cites=6271085228002524231&amp;as_sdt=2005&amp;sciodt=0,5&amp;hl=en" target="_blank" rel="noopener noreferrer" data-citation-id="signbt-cvpr2021">Cited by 541</a>
     </td>
   </tr>
 
@@ -817,11 +1316,11 @@ var _hmt = _hmt || [];
         Spatial-Temporal Multi-Cue Network for Continuous Sign Language Recognition
       <!-- </b> -->
       <br>
-      <b>Hao Zhou</b>, Wengang Zhou, Yun Zhou, Houqiang Li
+      <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou</b></a>, <a class="author-link" href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Wengang Zhou</a>, <a class="author-link" href="https://scholar.google.com/citations?user=vgJUiHoAAAAJ" target="_blank" rel="noopener noreferrer">Yun Zhou</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Houqiang Li</a>
       <br>
       AAAI Conference on Artificial Intelligence (AAAI), <b>Oral</b>, 2020
       <br>
-      <a href="https://arxiv.org/pdf/2002.03187.pdf" target="_blank">pdf</a>
+      <a href="https://arxiv.org/pdf/2002.03187.pdf" target="_blank" rel="noopener noreferrer">pdf</a>
     </td>
   </tr>
 
@@ -836,11 +1335,11 @@ var _hmt = _hmt || [];
         Dynamic Pseudo Label Decoding for Continuous Sign Language Recognition
       <!-- </b> -->
       <br>
-      <b>Hao Zhou</b>, Wengang Zhou, Houqiang Li
+      <a class="author-link" href="https://rhythmblue.github.io/" target="_blank" rel="noopener noreferrer"><b>Hao Zhou</b></a>, <a class="author-link" href="http://staff.ustc.edu.cn/~zhwg/" target="_blank" rel="noopener noreferrer">Wengang Zhou</a>, <a class="author-link" href="http://staff.ustc.edu.cn/~lihq/en/" target="_blank" rel="noopener noreferrer">Houqiang Li</a>
       <br>
       IEEE International Conference on Multimedia and Expo (ICME), 2019
       <br>
-      <a href="https://ieeexplore.ieee.org/document/8784863" target="_blank">pdf</a>
+      <a href="https://ieeexplore.ieee.org/document/8784863" target="_blank" rel="noopener noreferrer">pdf</a>
     </td>
   </tr>
 
@@ -850,6 +1349,7 @@ var _hmt = _hmt || [];
 </div>
 
 
+<div class="content-card">
 <h2><span class="lang-en">Academic Services</span><span class="lang-zh">学术服务</span></h2>
 <table id="tbServices" border="0" width="100%">
   <tbody>
@@ -893,40 +1393,24 @@ var _hmt = _hmt || [];
 
   </tbody>
 </table>
+</div>
 
 
-<h2><span class="lang-en">Working Experience</span><span class="lang-zh">工作经历</span></h2>
-<table id="tbExperiences" class="experience-table" border="0" width="100%">
-  <tbody>
-    <tr>
-      <td class="experience-date"><span class="lang-en">Jan. 2025 - Present</span><span class="lang-zh">2025.01 - 至今</span></td>
-      <td><span class="lang-en">Researcher, Monetization GenAI, Bytedance</span><span class="lang-zh">研究员，Monetization GenAI，字节跳动</span></td>
-    </tr>
-
-    <tr>
-      <td class="experience-date"><span class="lang-en">July. 2022 - Dec. 2024</span><span class="lang-zh">2022.07 - 2024.12</span></td>
-      <td><span class="lang-en">Researcher, Department of Computer Vision Technology (VIS), Baidu</span><span class="lang-zh">研究员，计算机视觉技术部（VIS），百度</span></td>
-    </tr>
-
-    <tr>
-      <td class="experience-date"><span class="lang-en">May. 2019 - July. 2019</span><span class="lang-zh">2019.05 - 2019.07</span></td>
-      <td><span class="lang-en">Research Intern, BigData Group, Baidu; Spatio-temporal Knowledge Graph</span><span class="lang-zh">研究实习生，BigData Group，百度；时空知识图谱研究</span></td>
-    </tr>
-  </tbody>
-</table>
-
+<div class="content-card">
 <h2><span class="lang-en">Teaching Experience</span><span class="lang-zh">教学经历</span></h2>
-<table id="tbExperiences" border="0" width="100%">
+<table id="tbTeaching" border="0" width="100%">
   <tbody>
     <tr>
-      <td><span class="lang-en">Spring 2020  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02, <a href="https://ustc-dia.github.io/" target="_blank">Digital Image Analysis</a></span><span class="lang-zh">2020 春季  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02，<a href="https://ustc-dia.github.io/" target="_blank">数字图像分析</a></span></td>
+      <td><span class="lang-en">Spring 2020  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02, <a href="https://ustc-dia.github.io/" target="_blank" rel="noopener noreferrer">Digital Image Analysis</a></span><span class="lang-zh">2020 春季  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; INY5205.02，<a href="https://ustc-dia.github.io/" target="_blank" rel="noopener noreferrer">数字图像分析</a></span></td>
     </tr>
     <tr>
-      <td><span class="lang-en">Spring 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01, <a href="https://ustc-dip.github.io" target="_blank">Digital Image Processing B</a></span><span class="lang-zh">2019 春季  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01，<a href="https://ustc-dip.github.io" target="_blank">数字图像处理 B</a></span></td>
+      <td><span class="lang-en">Spring 2019  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01, <a href="https://ustc-dip.github.io" target="_blank" rel="noopener noreferrer">Digital Image Processing B</a></span><span class="lang-zh">2019 春季  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 210708.01，<a href="https://ustc-dip.github.io" target="_blank" rel="noopener noreferrer">数字图像处理 B</a></span></td>
     </tr>
 </tbody>
 </table>
+</div>
 
+<div class="content-card">
 <h2><span class="lang-en">Awards</span><span class="lang-zh">获奖</span></h2>
 <table id="tbAwards" border="0" width="100%">
   <tbody>
@@ -944,6 +1428,10 @@ var _hmt = _hmt || [];
     </tr>
   </tbody>
 </table>
+</div>
+
+</div>
+</div>
 
 
 <!--
