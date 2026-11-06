@@ -31,11 +31,20 @@ def normalize_title(title):
     return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
 
 
-def pick_result(payload, expected_title):
+def pick_result(payload, expected_title, expected_cites_id=None):
     expected = normalize_title(expected_title)
     results = payload.get("organic_results") or []
     if not results:
         raise ValueError("SerpAPI response has no organic_results")
+
+    if expected_cites_id:
+        for result in results:
+            cited_by = (result.get("inline_links") or {}).get("cited_by") or {}
+            cites_id = str(cited_by.get("cites_id") or "")
+            cited_by_link = cited_by.get("link") or ""
+            if cites_id == expected_cites_id or f"cites={expected_cites_id}" in cited_by_link:
+                return result
+        raise ValueError(f"No Scholar result matched cites_id {expected_cites_id}")
 
     for result in results:
         if normalize_title(result.get("title", "")) == expected:
@@ -83,7 +92,7 @@ def main():
 
     for i, item in enumerate(config):
         payload = fetch_scholar_result(api_key, item["query"])
-        result = pick_result(payload, item["title"])
+        result = pick_result(payload, item["title"], item.get("cites_id"))
         count = citation_count(result)
         html = update_html(html, item["id"], count)
         print(f'{item["id"]}: {count}')
